@@ -4,12 +4,931 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>رمضان - القرآن والمعلومات الإسلامية</title>
-    <link rel="stylesheet" href="styless.css">
+    
     <link rel="icon" type="image/x-icon" href="ramdann.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lateef:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+    direction: rtl;
+    font-family: 'Lateef', cursive;
+    background-color: var( --primary-color);
+    color: var(--text-color);
+    font-size: 20px;
+    line-height: 1.8;
+    text-align:center;
+    font-family: 'Arial', sans-serif;
+    backdrop-filter: blur(3px);
+    background-image: linear-gradient(to right, #f8f5e680 0%, #f8f5e680 100%), url('islamic-pattern.png');
+}  
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #041b0c;
+    --secondary-color: #cdaf4d;
+    --accent-color: #0d4b0e;
+    --text-color: #333;
+    --bg-color: #f8f5e6;
+}
+
+#coran {
+    background: linear-gradient(135deg, #e8f5e9 0%, #f5f3e8 100%);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    margin: 3rem auto;
+    max-width: 1200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    position: relative;
+    overflow: hidden;
+}
+#coran::before {
+    content: '﴾﴿';
+    font-family: 'Arial';
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 3rem;
+    color: #2c5d2c;
+    opacity: 0.1;
+}
+#coran p {
+    font-size: 1.2rem;
+    color: #444;
+    text-align: center;
+    margin: 2rem auto;
+    max-width: 800px;
+    line-height: 1.8;
+}
+
+  
+.quran-link {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+    text-decoration: none;
+    color: #1a472a;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.quran-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+}
+
+  
+.quran-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border-color: #d4af37;
+}
+
+  
+header {
+    background: linear-gradient(rgba(3, 46, 61, 0.9), rgba(30, 26, 71, 0.7)), url('ramadan 3_lantern_1366x768.jpg');
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+
+section {
+    padding: 20px;
+    margin: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+h2 {
+    color: #dfbf1f;
+    font-size: 35px;
+}
+h4 {
+    color: #dfbf1f;
+    font-size: 35px;
+}
+h3 {
+    color: #dfbf1f;
+    font-size: 35px;
+}
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+form button:hover {
+    background: #b4279f;
+}
+
+
+
+
+#mon-header {
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height:600px;
+    background-repeat: no-repeat;
+    color: rgb(204, 135, 101);
+    padding: 20px;
+    transition: background-image 2s ease-in-out;
+    display: flex;
+    justify-content: center;
+    isolation: isolate;
+    align-items: center;
+    position: relative; 
+  }
+
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    list-style: none;
+    flex-wrap: wrap;
+}
+  
+ 
+nav a {
+    color: #fff6f6;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-size: 25px;
+    gap: 0.5rem;
+    padding: 0.8rem 1.2rem;
+    border-radius:30px;
+    transition: all 0.3s ease;
+    border: 2px solid #bc991bbe;
+    background: rgba(0, 0, 0, 0.656);
+}
+
+nav a:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+nav img {
+    width: 24px;
+    height:24px;
+    
+}
+ 
+section {
+    padding: 8rem 2rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#coran ul li a:hover {
+    background-color: #eaecee; 
+    color: #000000; 
+}
+#accueil {  
+    background: linear-gradient(rgba(3, 46, 61, 0.9), rgba(30, 26, 71, 0.7)), url('ramadan 3_lantern_1366x768.jpg');
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Prend toute la largeur de l'écran */
+    text-align: center;
+    padding: 4rem 2rem;
+    position: relative;
+    margin-top: 20px;
+    box-sizing: border-box;
+    border-bottom: 3px solid #c19b53;
+}
+
+    #accueil::before {
+        content: '﷽';
+        font-family: 'Amiri', serif;
+        position: relative; /* Évite un décalage non voulu */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 7.5vw;
+        color: rgba(240, 230, 211, 0.1);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+  
+    #accueil p {
+        font-family: 'Lateef', cursive;
+        font-size: 1.8rem;
+        color: #dcbe5a;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto 3rem;
+        padding: 1rem;
+        position: relative;
+        z-index: 1;
+    }
+    #accueil h2 {
+        font-size: 5rem;
+       margin-top: -60px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        position: relative;
+        z-index: 1;
+        color: #dcbe5a;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    #accueil p::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 200px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, #c19b53 50%, transparent 100%);
+    }
+
+    .quote-box {
+        background: rgba(240, 230, 211, 0.1);
+        border: 2px solid #c19b53;
+        border-radius: 15px;
+        padding: 0.5rem;
+        backdrop-filter: blur(5px);
+        max-width: 300px;
+        position: relative;
+        z-index: 1;
+        transition: all 0.3s ease;
+    }
+
+    .quote-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .quote-box h3 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        position: relative;
+    }
+
+    .quote-box h3::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 2px;
+        background: #c19b53;
+    }
+
+    #quote {
+        font-family: 'Lateef', cursive;
+        font-size: 1.5rem;
+        line-height: 1.8;
+        quotes: "“" "”";
+        animation: fadeIn 1.5s ease-in;
+    }
+
+    #quote::before,
+    #quote::after {
+        font-size: 2.5rem;
+        color: #c19b53;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        #accueil {
+            padding: 1rem;
+        }
+        
+        #accueil h2 {
+            font-size: 2.5rem;
+        }
+        
+        #accueil p {
+            font-size: 1.3rem;
+        }
+        
+        .quote-box {
+            padding: 1.5rem;
+        }
+        
+        #quote {
+            font-size: 1.2rem;
+        }
+    }
+
+
+    
+
+
+
+button{
+    display: inline-block;
+    background-color: #004d40;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  #btn {
+    background: #1a472a;
+    color: white !important;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin: 1rem 0;
+}
+
+#btn:hover {
+    background: #2c5d2c;
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(42,93,42,0.3);
+}  @media (max-width: 768px) {
+    #coran {
+        padding: 2rem 1rem;
+    }
+    
+    #coran h4 {
+        font-size: 2.2rem;
+    }
+    
+    #coran h5 {
+        font-size: 1.2rem;
+        padding: 1.5rem;
+    }
+    
+    .quran-links-grid {
+        grid-template-columns: 1fr;
+    }
+} #infos {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8f5ec 0%, #fff9f0 100%);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.section-title {
+    text-align: center;
+    color: #2a5d2a;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 3px;
+    background: #d4a537;
+}
+
+/* Sections de contenu */
+.sunnah-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    margin: 2rem 0;
+    border-left: 5px solid #d4a537;
+}
+
+.sunnah-title {
+    color: #2a5d2a;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.sunnah-item {
+    padding: 1.5rem;
+    margin: 1rem 0;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.sunnah-item:hover {
+    transform: translateX(10px);
+}
+
+.sunnah-item h4 {
+    color: #d4a537;
+    font-size: 1.4rem;
+    margin-bottom: 0.5rem;
+}
+
+.numbered-list {
+    list-style: none;
+    counter-reset: sunnah-counter;
+    padding: 0;
+}
+
+.numbered-list li {
+    counter-increment: sunnah-counter;
+    padding: 1rem 1rem 1rem 3rem;
+    margin: 1rem 0;
+    position: relative;
+    background: #fff5e6;
+    border-radius: 8px;
+}
+
+.numbered-list li::before {
+    content: counter(sunnah-counter);
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #d4a537;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+.blessed-hours {
+    background: #e8f5e9;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-top: 2rem;
+}
+
+.hour-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.hour-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.emoji {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.important-note {
+    background: #fff3cd;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    border-left: 4px solid #ffc107;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    #infos {
+        padding: 1rem;
+    }
+    
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .sunnah-section {
+        padding: 1rem;
+    }
+} /* Section Prières */
+#prieres {
+   background: linear-gradient(135deg, #f5f3e8 0%, #e8f5e9 100%);
+   padding: 4rem 2rem;
+   border-radius: 20px;
+   margin: 3rem auto;
+   max-width: 1200px;
+   box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+   position: relative;
+   overflow: hidden;
+}
+
+#prieres::before {
+   content: '🕌';
+   position: absolute;
+   top: 20px;
+   left: 20px;
+   font-size: 3rem;
+   opacity: 0.1;
+   transform: rotate(25deg);
+}
+
+#prieres h2 {
+   color: #1a472a;
+   font-size: 2.8rem;
+   text-align: center;
+   margin-bottom: 3rem;
+   position: relative;
+   font-weight: 700;
+}
+
+#prieres h2::after {
+   content: '';
+   position: absolute;
+   bottom: -15px;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 150px;
+   height: 3px;
+   background: #d4af37;
+}
+
+.douaa-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   gap: 2rem;
+   margin-top: 2rem;
+}
+
+.douaa-card {
+   background: white;
+   padding: 2rem;
+   border-radius: 15px;
+   text-align: right;
+   transition: all 0.3s ease;
+   border: 2px solid #e0e0e0;
+   position: relative;
+}
+
+.douaa-card:hover {
+   transform: translateY(-5px);
+   box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+   border-color: #d4af37;
+}
+
+.douaa-card::before {
+   content: '🌙';
+   position: absolute;
+   left: 20px;
+   top: 20px;
+   font-size: 1.5rem;
+   opacity: 0.3;
+}
+
+.douaa-link {
+   text-decoration: none;
+   color: #1a472a;
+   font-size: 1.3rem;
+   font-weight: 600;
+   display: block;
+   margin-bottom: 1rem;
+}
+
+.douaa-desc {
+   color: #555;
+   font-size: 1.1rem;
+   line-height: 1.7;
+   margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+   #prieres {
+       padding: 2rem 1rem;
+   }
+   
+   #prieres h2 {
+       font-size: 2.2rem;
+   }
+   
+   .douaa-card {
+       padding: 1.5rem;
+   }
+}
+
+ /* Styles communs */
+ .islamic-section {
+    background: linear-gradient(135deg, #f8f5ec 0%, #fff9f0 100%);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    margin: 2rem auto;
+    max-width: 1200px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.section-header {
+    text-align: center;
+    color: #1a472a;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-header::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 150px;
+    height: 3px;
+    background: #d4af37;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.islamic-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 15px;
+    text-align: right;
+    transition: all 0.3s ease;
+    border: 2px solid #e0e0e0;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.islamic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border-color: #d4af37;
+}
+
+.card-title {
+    color: #1a472a;
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-description {
+    color: #555;
+    line-height: 1.7;
+    font-size: 1.1rem;
+}
+
+/* Section Salat */
+#salat .islamic-card::before {
+    content: '🕌';
+    font-size: 2rem;
+    opacity: 0.1;
+    position: absolute;
+    left: 15px;
+    top: 15px;
+}
+
+/* Section Noms d'Allah */
+#names-of-allah .islamic-card {
+    background: #f5f3e8;
+    border-color: #d4af37;
+}
+.islamic-card a {
+    text-decoration: none !important;
+}
+.islamic-card a:hover {
+    text-decoration: none !important;
+    color: #1a472a;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .islamic-section {
+        padding: 2rem 1rem;
+    }
+    
+    .section-header {
+        font-size: 2rem;
+    }
+}
+
+
+#salat a, 
+#imsak a, 
+#names-of-allah a, 
+#hadit a {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+
+#ar{}
+#en{
+
+}
+
+
+
+
+
+
+
+#mon-header h1 {
+    font-family: 'Amiri', cursive;
+    text-align: center;
+    color: #f0e6d3;
+    padding: 0.5rem 1rem; /* Réduire le padding */
+    /* Taille de la bordure */
+    border-width: 1px; /* Épaisseur de la bordure */
+    border-radius: 10px; /* Arrondi des coins */
+    margin: 30px;
+    position: relative;
+    text-shadow: 0 0 12px #000000;
+    background: linear-gradient(45deg, #00051255 30%, #23180433 100%);
+    border-radius: 12px;
+    border: 2px solid #bc991bbe;
+    transition: all 0.3s ease;
+}
+
+#mon-header h1:hover {
+    transform: translateY(-3px);
+    text-shadow: 0 0 20px #ffffff;
+}
+#mon-header::after {
+    content: '';
+    position: absolute;
+    background: linear-gradient(rgba(3, 46, 61, 0.9), rgba(30, 26, 71, 0.7));
+    top: 0;
+    left: 0;
+    backdrop-filter: blur(0.5px);
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Place le flou derrière le contenu */
+} 
+
+
+/* smi la page p rincipale in dex ok ok mais att nchof afssa */
+
+
+#mon-header::before {
+    content: '"﷽"';
+    position: absolute;
+    top: 0;
+    left: 0;
+        pointer-events: none; /* Désactive l'interaction avec le pseudo-élément */
+    color:white;
+    width: 100%;
+    height: 100%;
+    font-size: 40px;
+}
+
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.8; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.1); }
+}
+
+
+#main-footer {
+  background: linear-gradient(rgba(3, 46, 61, 0.9), rgba(30, 26, 71, 0.7)), url('ramadan 3_lantern_1366x768.jpg');
+    background-size: cover;
+    color: #f0e6d3;
+    padding: 3rem 2rem;
+    border-top: 3px solid #c19b53;
+    position: relative;
+    font-family: 'Amiri', serif;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    text-align: center;
+}
+
+.footer-title {
+    font-size: 1.8rem;
+    color: #d4af37;
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.footer-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: #c19b53;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin: 1rem 0;
+}
+
+.footer-links a {
+    color: #f0e6d3;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #d4af37;
+    transform: translateX(5px);
+}
+
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 1.8rem;
+}
+
+.social-icons a {
+    color: #f0e6d3;
+    transition: transform 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #d4af37;
+    transform: translateY(-5px);
+}
+
+.copyright {
+    text-align: center;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #c19b5333;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .footer-section {
+        width: 100%;
+    }
+}
+
+    </style>
 </head>
 <body>
     <header id="mon-header">
