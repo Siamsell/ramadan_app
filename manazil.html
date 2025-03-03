@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>عرض أجزاء القرآن</title>
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Amiri', serif;
+  
+      color: #fff;
+      text-align: center;
+      margin: 0;
+      background: url('ramadan 3_lantern_1366x768.jpg') no-repeat center;
+      padding: 0;
+      backdrop-filter: blur(4px);
+    }
+
+    header {
+      background-size: cover;
+      color:#B89628;
+      padding: 50px 20px;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    header h1 {
+      font-size: 2.5em;
+      margin: 0;
+    }
+
+    section {
+      background-color: #B89628;
+      color: #000;
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      border:solid rgb(227, 202, 132) 2px;
+      box-shadow: 0 4px 8px rgba(254, 255, 251, 0.2);
+    }
+
+    input, select, button {
+      font-size: 1.2em;
+      padding: 10px;
+      margin: 10px;
+      
+      border-radius:10px;
+      border: 1px solid #dcdbb4;
+    }
+
+    button {
+      background-color:#4a3a06;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #dfe9b5;
+    }
+
+    #loadingMessage {
+      display: none;
+      font-size: 1.2em;
+      color: #d4af37;
+      margin-top: 15px;
+    }
+
+    #result {
+      margin-top: 20px;
+      font-size: 1.3em;
+      line-height: 1.6;
+      text-align: right;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>عرض أجزاء القرآن</h1>
+    <p>اختر رقم الجزء والنسخة لعرض النص</p>
+  </header>
+
+  <section>
+    <label for="manzil">رقم الجزء:</label>
+    <input type="number" id="manzil" min="1" max="7" value="1">
+    <br>
+    <label for="edition">النسخة:</label>
+    <select id="edition">
+      <option value="quran-uthmani">القرآن العثماني (نص)</option>
+      <option value="en.asad">The Holy Quran (Muhammad Asad) [Text]</option>
+    </select>
+    <br>
+    <button id="loadManzil">عرض الجزء</button>
+    <p id="loadingMessage">جاري التحميل...</p>
+    <div id="result"></div>
+  </section>
+
+  <script>
+    document.getElementById('loadManzil').addEventListener('click', async function() {
+      const manzil = document.getElementById('manzil').value;
+      const edition = document.getElementById('edition').value;
+      const url = `http://api.alquran.cloud/v1/manzil/${manzil}/${edition}`;
+      const loadingMessage = document.getElementById('loadingMessage');
+      const resultDiv = document.getElementById('result');
+      
+      loadingMessage.style.display = 'block';
+      resultDiv.innerHTML = '';
+      
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        loadingMessage.style.display = 'none';
+        
+        if (data.code === 200 && data.status === "OK") {
+          let html = "";
+          data.data.ayahs.forEach(ayah => {
+            html += `<p>﴾</span>${ayah.text}﴿<span>${ayah.numberInSurah}</p>`;
+          });
+          resultDiv.innerHTML = html;
+        } else {
+          resultDiv.innerHTML = "خطأ في جلب البيانات";
+        }
+      } catch (e) {
+        loadingMessage.style.display = 'none';
+        resultDiv.innerHTML = "حدث خطأ أثناء الاتصال بالخادم";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتجاه القبلة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&family=El+Messiri:wght@500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --islamic-gold: #c5a368;
+            --deep-navy: #c3d1db;
+            --arabesque-pattern: repeating-linear-gradient(45deg, 
+                transparent, 
+                transparent 10px, 
+                rgba(197, 163, 104, 0.1) 10px, 
+                rgba(197, 163, 104, 0.1) 20px);
+        }
+
+        body {
+            font-family: 'El Messiri', sans-serif;
+            background: var(--deep-navy) url('ramadan 3_lantern_1366x768.jpg');
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .container {
+            background: linear-gradient(145deg, rgba(10, 43, 70, 0.95), rgba(10, 43, 70, 0.85));
+            border: 2px solid var(--islamic-gold);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            box-shadow: 0 0 40px rgba(197, 163, 104, 0.2);
+            position: relative;
+            overflow: hidden;
+            max-width: 400px;
+            margin: 1rem;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: var(--arabesque-pattern);
+            opacity: 0.15;
+            pointer-events: none;
+        }
+
+        .title {
+    font-family: 'Amiri', 'El Messiri', sans-serif;
+    font-size: 2.8rem;
+    color: #c5a368;
+    text-align: center;
+    position: relative;
+    margin: 2rem 0;
+    padding: 1rem 0;
+    background: linear-gradient(45deg, #c5a368 20%, #e8d39f 50%, #c5a368 80%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 4px rgba(10, 43, 70, 0.3);
+    animation: title-glow 3s ease-in-out infinite alternate;
+}
+
+.title::before,
+.title::after {
+    content: '';
+    position: absolute;
+    width: 40%;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #c5a368, transparent);
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.title::before {
+    top: 0;
+}
+
+.title::after {
+    bottom: 0;
+}
+
+@keyframes title-glow {
+    0% {
+        opacity: 0.9;
+        text-shadow: 0 0 10px rgba(197, 163, 104, 0.3);
+    }
+    100% {
+        opacity: 1;
+        text-shadow: 0 0 20px rgba(197, 163, 104, 0.6),
+                     0 0 30px rgba(197, 163, 104, 0.4);
+    }
+}
+
+@media (max-width: 768px) {
+    .title {
+        font-size: 2.2rem;
+        margin: 1.5rem 0;
+    }
+}
+        .compass {
+            width: 220px;
+            height: 220px;
+            background: url('islamic-compass.png') no-repeat center;
+            background-size: contain;
+            margin: 1.5rem auto;
+            position: relative;
+            transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .compass::after {
+            content: '۩';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: var(--islamic-gold);
+            font-size: 2.5rem;
+            text-shadow: 0 0 15px rgba(197, 163, 104, 0.5);
+        }
+
+        .direction {
+            font-size: 1.6rem;
+            color: #e8d39f;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: rgba(10, 43, 70, 0.7);
+            border-radius: 0.8rem;
+            border: 1px solid rgba(197, 163, 104, 0.3);
+        }
+
+        button {
+            background: linear-gradient(145deg, #c5a368, #a8864f);
+            color: var(--deep-navy);
+            padding: 0.8rem 2rem;
+            border: none;
+            border-radius: 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(197, 163, 104, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(197, 163, 104, 0.4);
+        }
+
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                120deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        button:hover::before {
+            left: 100%;
+        }
+
+       
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">اتجاه القبلة</h1>
+        <div class="compass" id="compass"></div>
+        <p class="direction text-center" id="direction-text">جاري تحديد الموقع...</p>
+        <div class="text-center">
+            <button onclick="getLocationByIP()">تحديث الموقع</button>
+        </div>
+    </div>
+
+
+    <script>
+        // Fonction pour obtenir la direction de la Qibla
+        function getQiblaDirection(latitude, longitude) {
+            fetch(`https://api.aladhan.com/v1/qibla/${latitude}/${longitude}`)
+                .then(response => response.json())
+                .then(data => {
+                    const direction = data.data.direction;
+                    const compass = document.getElementById('compass');
+                    const directionText = document.getElementById('direction-text');
+                    
+                    // Rotation de la boussole
+                    compass.style.transform = `rotate(${direction}deg)`;
+                    directionText.innerHTML = `اتجاه القبلة: ${direction.toFixed(2)}°`;
+                })
+                .catch(error => {
+                    console.error('Erreur:', error);
+                    document.getElementById('direction-text').innerHTML = 'تعذر الحصول على الاتجاه';
+                });
+        }
+
+        // Fonction pour obtenir l'emplacement via l'IP
+        function getLocationByIP() {
+            fetch('https://ipwhois.app/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const latitude = data.latitude;
+                    const longitude = data.longitude;
+                    getQiblaDirection(latitude, longitude);
+                })
+                .catch(error => {
+                    console.error("خطأ في الحصول على الموقع عبر IP:", error);
+                    document.getElementById('direction-text').innerHTML = 'لا يمكن الحصول على الموقع عبر IP.';
+                });
+        }
+
+        // Appel de la fonction au chargement de la page
+        window.onload = getLocationByIP;
+    </script>
+</body>
+</html>

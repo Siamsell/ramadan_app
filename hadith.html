@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أحاديث أبي داود - Sahih Abu Dawud</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #d4af37;
+        }
+
+        body {
+      font-family: 'Amiri', serif;
+      background: url('ramadan 3_lantern_1366x768.jpg');
+      text-align: center;
+      color: #fff;
+      backdrop-filter: blur(3px);
+  
+    }
+
+.main-content {
+  overflow-y: auto;
+  max-height: 100vh;
+  padding: 2rem;
+}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 0;
+            border-bottom: 3px solid var(--primary-color);
+            margin-bottom: 40px;
+        }
+p{
+    font-size: 3.5em;
+}
+        h1 {
+            color: var(--primary-color);
+            font-size: 3.5em;
+            margin: 0;
+        }
+
+        .hadith-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            padding: 20px;
+        }
+
+        .hadith-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .hadith-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hadith-number {
+            font-size: 1.1em;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .arabic-text {
+            font-size: 1.4em;
+            color: var(--primary-color);
+            text-align: justify;
+            margin-bottom: 20px;
+            line-height: 2;
+        }
+
+        .translation {
+            font-size: 1.1em;
+            color: #555;
+            border-right: 3px solid var(--secondary-color);
+            padding-right: 15px;
+            margin-top: 15px;
+        }
+
+        .loading {
+            text-align: center;
+            font-size: 3.5em;
+            padding: 50px;
+            color:rgb(255, 255, 255);
+        }
+
+        @media (max-width: 768px) {
+            .hadith-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+    <div class="container">
+        <header>
+            <h1>سنن أبي داود</h1>
+            <p>أحاديث النبي محمد صلى الله عليه وسلم</p>
+        </header>
+        
+        <div class="hadith-grid" id="hadithContainer">
+            <div class="loading">جاري تحميل الأحاديث...</div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = 'https://hadis-api-id.vercel.app/hadith/abu-dawud?page=2&limit=300';
+
+        async function fetchHadiths() {
+            try {
+                const response = await fetch(API_URL);
+                const data = await response.json();
+                displayHadiths(data.items);
+            } catch (error) {
+                console.error('Error:', error);
+                hadithContainer.innerHTML = `
+                    <div class="error">
+                        <p>حدث خطأ في تحميل الأحاديث</p>
+                        <small>${error.message}</small>
+                    </div>`;
+            }
+        }
+
+        function displayHadiths(hadiths) {
+            const container = document.getElementById('hadithContainer');
+            container.innerHTML = '';
+            
+            hadiths.forEach(hadith => {
+                const card = document.createElement('div');
+                card.className = 'hadith-card';
+                card.innerHTML = `
+                    <div class="hadith-number">الحديث رقم: ${hadith.number}</div>
+                    <div class="arabic-text">${hadith.arab}</div>
+                    <div class="translation">${hadith.id}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Initial load
+        fetchHadiths();
+    </script>
+    </div>
+</body>
+</html>

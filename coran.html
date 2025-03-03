@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>القرآن الكريم - قائمة السور / عرض الصفحة</title>
+  <link rel="stylesheet" href="stylee.css">
+  <!-- Import de polices calligraphiques -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>القرآن الكريم</h1>
+    <h2>اختر سورة أو صفحة لعرض محتواها</h2>
+  </header>
+
+  <!-- Section pour afficher une page du Coran -->
+  <section id="pageSelector">
+    <h2>عرض صفحة من القرآن</h2>
+    <input type="number" id="pageNumber" min="1" max="604" placeholder="رقم الصفحة (1-604)" />
+    <button id="loadPageButton">عرض الصفحة</button>
+  </section>
+
+  <!-- Vue grille des sourates -->
+  <main id="gridView">
+    <div class="grid-container" id="surahGrid">
+      <!-- Les cartes des sourates seront insérées ici dynamiquement -->
+    </div>
+  </main>
+
+  <!-- Vue détail (pour sourate ou page) -->
+  <section id="contentView" class="hidden">
+    <button id="backButton">&larr; العودة إلى القائمة</button>
+    <header id="surahHeader">
+      <h2 id="surahTitle"></h2>
+    </header>
+    <div id="contentContainer">
+      <!-- Le contenu complet (ayahs) s'affichera ici -->
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 - موقع القرآن الكريم</p>
+  </footer>
+
+  <script src="scrip.js"></script>
+</body>
+</html>

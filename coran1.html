@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>القرآن الكريم - نسخة كاملة</title>
+  <link rel="stylesheet" href="ss.css">
+  <!-- Import de polices calligraphiques -->
+  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Scheherazade&display=swap" rel="stylesheet">
+</head>
+<body>
+  <header>
+    <h1>القرآن الكريم</h1>
+    <h2>اختر النسخة لعرض القرآن الكامل</h2>
+  </header>
+
+  <!-- Sélecteur d'édition -->
+  <section id="editionSelector">
+    <h2>اختيار النسخة</h2>
+    <select id="editionSelect">
+      <!-- Vous pouvez ajouter d'autres éditions si nécessaire -->
+      <option value="quran-uthmani">القرآن - التجويد (القرآن العثماني) [نص]</option>
+      <option value="en.asad">The Holy Quran (Muhammad Asad) [Text]</option>
+      <option value="ar.alafasy">القرآن - تلاوة المريشي العفاسي [صوت]</option>
+    </select>
+    <button id="loadQuranButton">عرض القرآن الكامل</button>
+  </section>
+
+  <!-- Vue liste des sourates -->
+  <section id="surahListView" class="hidden">
+    <button id="backToEditionButton">&larr; العودة إلى اختيار النسخة</button>
+    <div class="grid-container" id="surahGrid">
+      <!-- Les cartes des sourates seront insérées ici -->
+    </div>
+  </section>
+
+  <!-- Vue détail d'une sourate -->
+  <section id="surahDetailView" class="hidden">
+    <button id="backToListButton">&larr; العودة إلى قائمة السور</button>
+    <header id="surahHeader">
+      <h2 id="surahTitle"></h2>
+    </header>
+    <div id="contentContainer">
+      <!-- Le contenu de la sourate (texte ou audio) s'affichera ici -->
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 - موقع القرآن الكريم</p>
+  </footer>
+
+  <script src="sc.js"></script>
+</body>
+</html>

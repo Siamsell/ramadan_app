@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>القرآن الكريم - استماع للسور</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #c19b62;
+            --gold-light: #e8d8b8;
+            --gold-dark: #B89628;
+        }
+
+        body {
+            font-family: 'Amiri', serif;
+            text-align: center;
+            background: url('ramadan 3_lantern_1366x768.jpg') no-repeat center center fixed;
+            color: #000000;
+          backdrop-filter: blur(2px);
+            padding: 20px;
+            direction: rtl;
+            background-size: cover;
+            min-height: 100vh;
+            background-attachment: fixed;
+        }
+
+        h1 {
+    color: var(--primary-color);
+    font-size: 2em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 3px solid var(--gold-dark);
+    border-radius: 20px;
+    background: linear-gradient(to right, var(--gold-light), var(--gold-dark));
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.search-box input[type="text"] {
+    padding: 15px;
+    width: 70%;
+    font-size: 18px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+        input[type="text"] {
+            padding: 15px 40px;
+            width: 70%;
+            font-size: 18px;
+            border: 2px solid var(--secondary-color);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            background-repeat: no-repeat;
+            background-position: 95% center;
+            transition: all 0.3s ease;
+        }
+
+        select {
+    padding: 12px;
+    width: 50%;
+    font-size: 18px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.9);
+    text-align-last: center;
+}
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 30px 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            max-width: 1000px;
+            margin: 30px auto;
+        }
+
+        li {
+            position: relative;
+            transition: transform 0.3s ease;
+            
+        }
+
+        li:hover {
+            transform: translateY(-3px);
+        }
+   
+  button {
+            padding: 15px 25px;
+            background: linear-gradient(to right, var(--gold-light), var(--gold-dark));
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1.5em;
+            box-shadow: 0 4px 6px rgba(110, 52, 4, 0.818);
+            position: relative;
+            overflow: hidden;
+        }
+        button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(223, 137, 7, 0.332), transparent);
+            transform: rotate(35deg);
+        }
+        button:hover {
+    background: linear-gradient(to right, #623f25, #73420a);
+    box-shadow: 0 6px 8px rgba(79, 44, 2, 0.2);
+}
+
+
+        
+
+        .audio-player {
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid var(--secondary-color);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 40px auto;
+            position: relative;
+        }
+
+       
+        .audio-player h3 {
+            color: var(--primary-color);
+            margin: 0 0 20px 0;
+            font-size: 1.4em;
+        }
+
+        audio {
+            width: 100%;
+            filter: sepia(50%) hue-rotate(50deg) saturate(150%);
+        }
+        .reciter-container {
+    max-width: 300px;
+    margin: 20px auto;
+    text-align: right;
+    font-family: 'Arial', sans-serif;
+}
+        .reciter-label {
+            color: var(--primary-color);
+    font-size: 1.8em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+    padding: 10px ;
+    border: 3px solid var(--gold-dark);
+    border-radius: 20px;
+    background: linear-gradient(to right, var(--gold-light), var(--gold-dark));
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+.custom-select select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    background-color: #fff;
+    margin-top: 30px;
+    color: #000000;
+    font-size: 1em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    direction: rtl;
+}
+h2{ color: var(--primary-color);
+    font-size: 1.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 3px solid var(--gold-dark);
+    border-radius: 20px;
+    background: linear-gradient(to right, var(--gold-light), var(--gold-dark));
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);}
+.custom-select select:focus {
+    border-color: #9a7b2c;
+    box-shadow: 0 4px 10px rgba(215, 167, 11, 0.2);
+    outline: none;
+}
+
+.custom-select::after {
+    content: '▼';
+    position: absolute;
+    top: 70%;
+    right: 15px;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #000000;
+    font-size: 1.2em;
+}
+#loading-message{
+    color: rgb(236, 223, 223);
+    padding:5px;
+    font-size: 10px;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+        @media (max-width: 768px) {
+            input[type="text"], select {
+                width: 90%;
+            }
+
+            ul {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+        /* Ajout de la police Amiri */
+        @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+    </style>
+</head>
+<body>
+    
+    <h1>القرآن الكريم - استماع للسور</h1>
+
+    <div class="search-box">
+        <input type="text" id="searchReciter" placeholder="ابحث عن القارئ..." oninput="filterReciters()">
+    </div>
+
+    <div class="audio-player">
+        <h3 id="currentSurah">لم يتم اختيار السورة بعد</h3>
+        <audio id="audioPlayer" controls>
+            <source id="audioSource" src="" type="audio/mp3">
+            متصفحك لا يدعم تشغيل الصوت.
+        </audio>
+    </div>
+    <div class="reciter-container">
+        <label for="reciter" class="reciter-label">اختر القارئ :</label>
+        <div id="loading-message">
+            <div class="spinner"></div>
+            <p>جاري التحميل، يرجى الانتظار...</p>
+        </div>
+        <div class="custom-select">
+            <select id="reciter" onchange="fetchSurahs()">
+                <option id="op" value="">-- اختر القارئ --</option>
+    </select>
+</div>
+</div>
+
+    <h2>اختر السورة :</h2>
+    <ul id="surahList"></ul>
+
+   
+
+    <script>
+        let reciters = [];
+
+        // Charger les récitateurs depuis l'API
+        async function fetchReciters() {
+            try {
+                const response = await fetch('https://alquran.vip/APIs/reciters');
+                const data = await response.json();
+                reciters = data.reciters;
+                displayReciters(reciters);
+            } catch (error) {
+                console.error('Erreur lors du chargement des récitateurs:', error);
+            }
+        }
+
+        // Afficher les récitateurs dans la liste déroulante
+        function displayReciters(list) {
+            const reciterSelect = document.getElementById('reciter');
+            reciterSelect.innerHTML = '<option value="">اختيار القارئ</option>';
+            list.forEach(reciter => {
+                const option = document.createElement('option');
+                option.value = reciter.reciter_id;
+                option.textContent = reciter.reciter_name;
+                reciterSelect.appendChild(option);
+            });
+        }
+
+        // Filtrer les récitateurs en fonction de la recherche
+        function filterReciters() {
+            const searchTerm = document.getElementById('searchReciter').value.toLowerCase();
+            const filteredReciters = reciters.filter(reciter =>
+                reciter.reciter_name.toLowerCase().includes(searchTerm)
+            );
+            displayReciters(filteredReciters);
+        }
+
+        // Charger les sourates pour le réciteur sélectionné
+        async function fetchSurahs() {
+            const reciterId = document.getElementById('reciter').value;
+            const surahList = document.getElementById('surahList');
+            surahList.innerHTML = '';
+
+            if (!reciterId) return;
+
+            try {
+                const response = await fetch(`https://alquran.vip/APIs/reciterAudio?reciter_id=${reciterId}`);
+                const data = await response.json();
+
+                data.audio_urls.forEach(surah => {
+                    const listItem = document.createElement('li');
+                    const button = document.createElement('button');
+                    button.textContent = surah.surah_name_ar;
+                    button.onclick = () => playAudio(surah.audio_url, surah.surah_name_ar);
+                    listItem.appendChild(button);
+                    surahList.appendChild(listItem);
+                });
+            } catch (error) {
+                console.error('Erreur lors du chargement des sourates:', error);
+            }
+        }
+
+        // Lecture de l'audio
+        function playAudio(audioUrl, surahName) {
+            const audioPlayer = document.getElementById('audioPlayer');
+            const audioSource = document.getElementById('audioSource');
+            const currentSurah = document.getElementById('currentSurah');
+
+            audioSource.src = audioUrl;
+            audioPlayer.load();
+            audioPlayer.play();
+
+            currentSurah.textContent = `السورة الحالية: ${surahName}`;
+
+            // Mettre à jour le style de la sourate active
+            document.querySelectorAll('#surahList li').forEach(li => li.classList.remove('active-surah'));
+            event.target.parentElement.classList.add('active-surah');
+        }
+        
+
+        // Initialisation au chargement de la page
+        fetchReciters();
+        function showLoadingMessage() {
+        document.getElementById('loading-message').style.display = 'block';
+    }
+
+    // Masquer le message de chargement
+    function hideLoadingMessage() {
+        document.getElementById('loading-message').style.display = 'none';
+    }
+
+    // Simule le chargement de la liste des sourates
+    function loadSurahList() {
+        showLoadingMessage();
+
+        // Simulation du chargement (par exemple, un appel à une API)
+        setTimeout(function() {
+            hideLoadingMessage();
+        }, 3000); // 3 secondes
+    }
+
+    // Appel de la fonction de chargement lors du chargement de la page
+    window.onload = function() {
+        loadSurahList();
+    };
+    </script>
+</body>
+</html>

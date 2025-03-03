@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ليلة القدر</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css">
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap');
+
+body {
+    font-family: 'Amiri', serif;
+    background: url('ramadan 3_lantern_1366x768.jpg') no-repeat center center fixed;
+    background-size: cover;
+    text-align: center;
+    color: #fff;
+    backdrop-filter: blur(4px);
+}
+
+.main-content {
+    overflow-y: auto;
+    max-height: 100vh;
+    padding: 2rem;
+}
+
+.container {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 20px;
+    box-shadow: 0 4px 12px rgba(194, 190, 166, 0.3);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+h1 {
+    font-size: 55px;
+    text-shadow: 0 0 15px #B89628, 0 0 30px #d69e2e;
+    color: #B89628;
+    border-bottom: 2px solid #d69e2e;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    animation: glow 2s infinite alternate;
+}
+
+/* Effet de lumière sur le titre */
+@keyframes glow {
+    0% { text-shadow: 0 0 15px #B89628, 0 0 30px #d69e2e; }
+    100% { text-shadow: 0 0 30px #6e6328, 0 0 60px #f2d192; }
+}
+
+/* Apparition progressive */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    color: #e3bb41;
+    margin-top: 5px;
+    font-size: 28px;
+    border-bottom: #6e6328  solid 2px;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.5);
+}
+
+p, li {
+    font-size: x-large;
+    line-height: 2;
+    font-family: 'Amiri', serif;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Effet de survol */
+.container:hover {
+    transform: scale(1.03);
+    transition: 0.3s;
+}
+
+/* Style des listes */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+ul li {
+    background: rgba(255, 215, 0, 0.2);
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    display: inline-block;
+    font-weight: bold;
+    color: #FFD700;
+}
+
+    </style>
+</head>
+<body>
+    <div class="main-content">
+    <h1>ليلة القدر</h1>
+    <div id="laylat-container" class="container">
+        <p>جارٍ تحميل المعلومات...</p>
+    </div>
+    <script>
+        async function fetchLaylat() {
+            try {
+                const response = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://alquran.vip/APIs/laylatAlQadr'));
+                const result = await response.json();
+                const data = JSON.parse(result.contents);
+                const laylat = data.laylat_al_qadr;
+                const container = document.getElementById('laylat-container');
+                let content = '';
+                for (const key in laylat) {
+                    if (laylat[key].name) {
+                        content += `<h2>${laylat[key].name}</h2>`;
+                        if (typeof laylat[key].value === 'string') {
+                            content += `<p>${laylat[key].value}</p>`;
+                        } else if (Array.isArray(laylat[key].value)) {
+                            content += '<ul>';
+                            laylat[key].value.forEach(item => {
+                                content += `<li>${item}</li>`;
+                            });
+                            content += '</ul>';
+                        } else {
+                            for (const subKey in laylat[key]) {
+                                if (subKey !== 'name') {
+                                    content += `<p>${laylat[key][subKey]}</p>`;
+                                }
+                            }
+                        }
+                    }
+                }
+                container.innerHTML = content;
+            } catch (error) {
+                console.error('Erreur lors du chargement des données:', error);
+                document.getElementById('laylat-container').innerHTML = "<p>حدث خطأ أثناء تحميل المعلومات. يرجى المحاولة لاحقًا.</p>";
+            }
+        }
+        fetchLaylat();
+    </script>
+    </div>
+</body>
+</html>

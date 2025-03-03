@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الأسماء الحسنى</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #000000;
+            --secondary-color: #d4af37;
+        }
+
+        body {
+      font-family: 'Amiri', serif;
+      background: url('ramadan 3_lantern_1366x768.jpg');
+      text-align: center;
+      color: #fff;
+      overflow: hidden;
+      backdrop-filter: blur(3px);
+  
+    }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+        }
+
+        .arabic-title {
+            font-size: 3.5em;
+            color: var(--primary-color);
+            margin: 0;
+            line-height: 1.5;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 2em;
+            color: var(--secondary-color);
+            margin: 10px 0;
+        }
+
+        .definition {
+            font-size: 1.9em;
+            max-width: 800px;
+            line-height: 1.6;
+            text-align: center;
+            color: var(--secondary-color);
+            margin: 0;
+            padding: 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .names-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px;
+        }
+
+        .name-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .name-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .arabic {
+            font-size: 2.8em;
+            color: var(--primary-color);
+            margin: 15px 0;
+            line-height: 1.4;
+        }
+
+        .latin {
+            font-size: 1.4em;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+        .main-content {
+  overflow-y: auto;
+  max-height: 100vh;
+  padding: 2rem;
+}
+
+        .number {
+            font-size: 1.2em;
+            color: #666;
+            font-weight: bold;
+        }
+
+        .loading {
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #d4af37;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    display: inline-block;
+    margin: 20px auto;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+
+        @media (max-width: 768px) {
+            .names-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .arabic-title {
+                font-size: 2.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-content">
+    <div class="container">
+        <header>
+            <h1 class="arabic-title">اَسْمَاءُالله الْحُسْنَى</h1>
+            <h2 class="subtitle">Les 99 Noms d'Allah ﷻ</h2>
+            <p class="definition">
+                <p class="definition">
+                    أسماء الله الحسنى تمثل الصفات الإلهية المذكورة في القرآن الكريم والسنة النبوية<br>
+                    .كل اسم منها يظهر بُعدًا من عظمة الخالق ورحمته الواسعة
+                </p>
+            </p>
+        </header>
+        
+        <div class="loading" id="loadingMessage">Chargement en cours...</div>
+        <div class="names-grid" id="namesContainer"></div>
+        
+        </div>
+    </div>
+
+    <script>
+      const CORS_PROXY = 'https://api.allorigins.win/get?url=';
+const API_URL = encodeURIComponent('https://api.islamicdevelopers.com/v1/al-asma-ul-husna');
+const loadingMessage = document.getElementById('loadingMessage');
+const namesContainer = document.getElementById('namesContainer');
+
+async function fetchNames() {
+    try {
+        loadingMessage.style.display = 'block'; // Affiche le message de chargement
+        const response = await fetch(`${CORS_PROXY}${API_URL}`);
+        const data = await response.json();
+        const names = JSON.parse(data.contents);
+
+        // Cache le message de chargement une fois les données chargées
+        loadingMessage.style.display = 'none';
+        return names;
+    } catch (error) {
+        console.error('Erreur:', error);
+        namesContainer.innerHTML = `
+            <div class="error">
+                <p>Erreur de chargement</p>
+                <small>${error.message}</small>
+            </div>`;
+        loadingMessage.style.display = 'none';
+        return null;
+    }
+}
+
+        function createNameCard(number, name) {
+            const card = document.createElement('div');
+            card.className = 'name-card';
+            card.innerHTML = `
+                <div class="number">${number}</div>
+                <div class="arabic">${name.native}</div>
+                <div class="latin">${name.latin}</div>
+            `;
+            return card;
+        }
+
+        // Chargement initial
+        fetchNames().then(names => {
+            const container = document.getElementById('namesContainer');
+            container.innerHTML = '';
+            Object.entries(names).forEach(([number, name]) => {
+                container.appendChild(createNameCard(number, name));
+            });
+        });
+    </script>
+    </div>
+</body>
+</html>
