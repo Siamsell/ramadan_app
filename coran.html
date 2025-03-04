@@ -4,12 +4,290 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>القرآن الكريم - قائمة السور / عرض الصفحة</title>
-  <link rel="stylesheet" href="stylee.css">
-  <!-- Import de polices calligraphiques -->
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Scheherazade&display=swap" rel="stylesheet">
 </head>
 <body>
+  <style>
+    body {
+  font-family: 'Amiri', serif;
+  background: url('ramadan 3_lantern_1366x768.jpg') no-repeat center center fixed;
+    background-size: cover;
+  color: #333;
+  direction: rtl;
+  margin: 0;
+  padding: 20px;
+}
+
+:root {
+  --primary-color: #1a472a;    /* Vert islamique */
+  --secondary-color: #c19b53;  /* Or */
+  --background-color: #0a193b; /* Bleu nuit */
+  --text-color: #f0e6d3;       /* Crème */
+  --border-radius: 12px;
+}
+
+header {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, 
+    rgba(26, 71, 42, 0.9) 0%, 
+    rgba(10, 25, 59, 0.9) 100%),
+    url('islamic-pattern.png');
+  border-bottom: 3px solid var(--secondary-color);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+header h1 {
+  font-size: 3.5rem;
+  color: var(--secondary-color);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  margin-bottom: 1rem;
+}
+
+header h2 {
+  font-size: 1.8rem;
+  font-weight: 300;
+}
+
+#pageSelector {
+  padding: 2rem;
+  text-align: center;
+  background: rgba(240, 230, 211, 0.05);
+  margin: 2rem auto;
+  width: 90%;
+  max-width: 600px;
+  border-radius: var(--border-radius);
+  border: 1px solid rgba(193, 155, 83, 0.3);
+}
+
+#pageSelector h2 {
+  margin-bottom: 1.5rem;
+  color: var(--secondary-color);
+}
+
+#pageSelector input {
+  padding: 8px;
+  font-size: 1em;
+  width: 200px;
+  border: 2px solid #868436;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+#pageSelector button {
+  padding: 8px 12px;
+  background-color: #f3d078;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+header h2 {
+  font-size: 1.6em;
+  margin-top: 10px;
+  color: #ffffff;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+#pageSelector button:hover {
+  background-color:#f3d078;
+}
+/* Grille de sourates */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 15px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+ p{
+  font-size :40px;
+ }
+.surah-card {
+  background: #fff;
+  border: 5px solid #ece57e;
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+
+.surah-card::before {
+  content: '۞';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-size: 6rem;
+  color: rgba(193, 155, 83, 0.1);
+  pointer-events: none;
+}
+.surah-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+.surah-card h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #00796b;
+}
+
+.surah-card p {
+  margin: 5px 0 0;
+  font-size: 0.9em;
+}
+
+/* Vue contenu de la sourate */
+#contentView {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+#backButton {
+  background: var(--secondary-color);
+  color: var(--background-color);
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+footer {
+  margin-top: auto;
+  padding: 2rem;
+  text-align: center;
+  background: rgba(26, 71, 42, 0.1);
+}
+#backButton:hover {
+  background-color: #e2de8a;
+}
+
+#contentContainer {
+  background: #fff;
+  border: 2px solid #004d40;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.ayah {
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #ccc;
+  font-size: 2em;
+  text-align: center;
+}
+
+.ayah:last-child {
+  border-bottom: none;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Responsive */
+@media screen and (max-width: 1200px) {
+  .grid-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #004d40;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #00695c;
+}
+#manzilSection {
+  text-align: center;
+  margin: 30px 0;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 2px solid #c0cecb;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+#manzilSection header h1 {
+  font-size: 2em;
+  color: #adcfca;
+  margin-bottom: 10px;
+}
+#loadPageButton {
+  padding: 0.8rem 2rem;
+  background: var(--secondary-color);
+  border: none;
+  border-radius: 30px;
+  color: var(--background-color);
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+#surahTitle {
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+  position: relative;
+  display: inline-block;
+}
+#surahTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: var(--secondary-color);
+}
+
+button{
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #004d40;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1.2em;
+  transition: background-color 0.3s;
+}@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.5rem;
+  }
+  
+  .grid-container {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+  
+  #pageSelector {
+    width: 95%;
+  }
+  
+  #pageNumber {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  #loadPageButton {
+    width: 100%;
+  }
+}
+  </style>
   <header>
     <h1>القرآن الكريم</h1>
     <h2>اختر سورة أو صفحة لعرض محتواها</h2>
