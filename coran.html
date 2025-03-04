@@ -322,6 +322,129 @@ button{
     <p>&copy; 2025 - موقع القرآن الكريم</p>
   </footer>
 
-  <script src="scrip.js"></script>
+  <script> 
+    const surahsApi = 'http://api.alquran.cloud/v1/surah';       // Liste des 114 sourates
+    const surahDetailApi = 'http://api.alquran.cloud/v1/surah/';    // Détail d'une sourate
+    const pageApi = 'http://api.alquran.cloud/v1/page/';            // Pour afficher une page : /{page}/quran-uthmani
+    
+    // Variables globales
+    let currentSurahNumber = null;
+    let currentSurahName = '';
+    
+    // Charge la liste des sourates et affiche la grille
+    async function loadSurahList() {
+      try {
+        const response = await fetch(surahsApi);
+        const data = await response.json();
+        const surahs = data.data;
+        displaySurahGrid(surahs);
+      } catch (error) {
+        console.error('Erreur lors du chargement des sourates:', error);
+      }
+    }
+    
+    function displaySurahGrid(surahs) {
+      const grid = document.getElementById('surahGrid');
+      grid.innerHTML = '';
+      surahs.forEach(surah => {
+        const card = document.createElement('div');
+        card.classList.add('surah-card');
+        card.innerHTML = `
+          <h3>${surah.number}. ${surah.name}</h3>
+          <p>${surah.englishName}</p>
+        `;
+        card.addEventListener('click', () => {
+          currentSurahNumber = surah.number;
+          currentSurahName = surah.name;
+          loadSurahDetail(currentSurahNumber);
+        });
+        grid.appendChild(card);
+      });
+    }
+    
+    // Charge et affiche le contenu complet d'une sourate (toutes ses ayahs)
+    async function loadSurahDetail(surahNumber) {
+      try {
+        const response = await fetch(surahDetailApi + surahNumber);
+        const data = await response.json();
+        if (data.code === 200 && data.status === "OK") {
+          const surahData = data.data;
+          displaySurahDetail(surahData);
+        } else {
+          console.error('Données non valides pour la sourate', surahNumber);
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement du détail de la sourate:', error);
+      }
+    }
+    
+    function displaySurahDetail(surahData) {
+      // Affiche la vue détail et cache la grille et le sélecteur de page
+      document.getElementById('gridView').classList.add('hidden');
+      document.getElementById('pageSelector').classList.add('hidden');
+      document.getElementById('contentView').classList.remove('hidden');
+      document.getElementById('surahTitle').textContent = `${surahData.number}. ${surahData.name} - ${surahData.englishName}`;
+      const container = document.getElementById('contentContainer');
+      container.innerHTML = '';
+      surahData.ayahs.forEach(ayah => {
+        const ayahDiv = document.createElement('div');
+        ayahDiv.classList.add('ayah');
+        ayahDiv.innerHTML = `<p><span class="ayah-marker">${ayah.numberInSurah}﴿</span>${ayah.text}﴾</p>`;
+        container.appendChild(ayahDiv);
+      });
+    }
+    
+    // Charge et affiche le contenu d'une page du Coran
+    async function loadPageContent(pageNum) {
+      try {
+        // Utilisation de l'édition "quran-uthmani" pour le texte arabe
+        const response = await fetch(`${pageApi}${pageNum}/quran-uthmani`);
+        const data = await response.json();
+        if (data.code === 200 && data.status === "OK") {
+          displayPageContent(pageNum, data.data);
+        } else {
+          console.error("Données non valides pour la page", pageNum);
+        }
+      } catch (error) {
+        console.error("Erreur lors du chargement du contenu de la page:", error);
+      }
+    }
+    
+    function displayPageContent(pageNum, pageData) {
+      // Cache la grille et le sélecteur de page, affiche la vue détail
+      document.getElementById('gridView').classList.add('hidden');
+      document.getElementById('pageSelector').classList.add('hidden');
+      document.getElementById('contentView').classList.remove('hidden');
+      document.getElementById('surahTitle').textContent = `صفحة ${pageNum}`;
+      const container = document.getElementById('contentContainer');
+      container.innerHTML = '';
+      pageData.ayahs.forEach(ayah => {
+        const ayahDiv = document.createElement('div');
+        ayahDiv.classList.add('ayah');
+        ayahDiv.innerHTML = `<p><span class="ayah-marker">${ayah.numberInSurah}﴿</span>${ayah.text}﴾</p>`;
+        container.appendChild(ayahDiv);
+      });
+    }
+    
+    // Gestion du bouton de chargement d'une page
+    document.getElementById('loadPageButton').addEventListener('click', () => {
+      const pageNum = document.getElementById('pageNumber').value;
+      if (pageNum && pageNum >= 1 && pageNum <= 604) {
+        loadPageContent(pageNum);
+      } else {
+        alert("Veuillez entrer un numéro de page valide (1-604)");
+      }
+    });
+    
+    // Bouton retour à la vue principale (grille et sélecteur de page)
+    document.getElementById('backButton').addEventListener('click', () => {
+      document.getElementById('contentView').classList.add('hidden');
+      document.getElementById('gridView').classList.remove('hidden');
+      document.getElementById('pageSelector').classList.remove('hidden');
+    });
+    
+    // Au chargement de la page, on charge la liste des sourates
+    document.addEventListener('DOMContentLoaded', loadSurahList);
+    </script>
 </body>
 </html>
