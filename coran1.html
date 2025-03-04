@@ -4,12 +4,167 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>القرآن الكريم - نسخة كاملة</title>
-  <link rel="stylesheet" href="ss.css">
   <!-- Import de polices calligraphiques -->
   <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Scheherazade&display=swap" rel="stylesheet">
 </head>
 <body>
+  <style>
+    /* Fond général avec texture de page (remplacez 'quran_background.jpg' par votre image) */
+body {
+  background: url('ramadan 3_lantern_1366x768.jpg');
+    background-size: cover;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Scheherazade', 'Amiri', serif;
+    direction: rtl;
+    color: #3e3e3e;
+  }
+  
+  /* En-tête */
+  header {
+    text-align: center;
+    color: #a69936;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+font-size: 30px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  }
+  header h1 {
+    font-size: 2.8em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  }
+  header h2 {
+    font-size: 50px;
+    margin-top: 10px;
+    color: #cfd8dc;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  }
+  
+  /* Sélecteur d'édition */
+  #editionSelector {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  #editionSelector h2 {
+    color: #a2afad;
+    margin-bottom: 10px;
+  }
+  #editionSelector select {
+    padding: 8px;
+    font-size: 1em;
+    width: 300px;
+    border: 2px solid #dfefb7;
+    border-radius: 5px;
+    margin-right: 10px;
+  }
+  #editionSelector button {
+    padding: 8px 12px;
+    background-color: #a69936;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  #editionSelector button:hover {
+    background-color: #a69936;
+  }
+  
+  /* Grille des sourates */
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .surah-card {
+    background: #fff;
+    border: 2px solid#a69936;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+    cursor: pointer;
+  }
+  .surah-card:hover {
+    transform: scale(1.05);
+  }
+  .surah-card h3 {
+    margin: 0;
+    font-size: 1.2em;
+    color:#a69936;
+  }
+  .surah-card p {
+    margin: 5px 0 0;
+    font-size: 1em;
+  }
+  
+  /* Vue détail */
+  #surahDetailView {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  #contentContainer {
+    background: rgba(255, 255, 240, 0.95);
+    border: 3px solid #d4af37;
+    border-radius: 15px;
+    padding: 40px;
+    margin: 30px auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    font-size: 1.9em;
+    line-height: 1.8;
+    text-align: justify;
+  }
+  
+  /* Style pour les ayahs en mode texte */
+  .ayah {
+    margin: 0;
+    padding: 2px 0;
+    /* On force le rendu RTL pour assurer la bonne direction */
+    direction: rtl;
+  }
+  .ayah-marker {
+    font-size: 1em;
+    margin-right: 0.3em;
+    vertical-align: middle;
+  }
+  
+  /* Boutons de retour */
+  button {
+    margin-bottom: 20px;
+    padding: 8px 12px;
+    background-color:#a69936;
+    color: #fff;
+    border: none;
+    font-size: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  button:hover {
+    background-color:#a69936;
+  }
+  
+  /* Utilitaire */
+  .hidden {
+    display: none;
+  }
+  
+  /* Responsive */
+  @media screen and (max-width: 1200px) {
+    .grid-container {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  @media screen and (max-width: 768px) {
+    .grid-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  </style>
   <header>
     <h1>القرآن الكريم</h1>
     <h2>اختر النسخة لعرض القرآن الكامل</h2>
@@ -50,6 +205,133 @@
     <p>&copy; 2025 - موقع القرآن الكريم</p>
   </footer>
 
-  <script src="sc.js"></script>
+  <script>// API endpoints de alquran.cloud
+    const surahsApi = 'http://api.alquran.cloud/v1/surah';  // Liste des sourates (114)
+    const surahDetailApi = 'http://api.alquran.cloud/v1/surah/';  // Détail d'une sourate (texte ou audio inclus)
+    const quranEditionApi = 'http://api.alquran.cloud/v1/quran/'; // Endpoint complet pour une édition (optionnel ici)
+    
+    // Variables globales
+    let currentEdition = '';  // Edition sélectionnée (ex: "quran-uthmani", "en.asad", "ar.alafasy")
+    let currentSurahNumber = null;
+    let currentSurahName = '';
+    
+    // Chargement de la liste des sourates
+    async function loadSurahList() {
+      try {
+        const response = await fetch(surahsApi);
+        const data = await response.json();
+        const surahs = data.data;
+        displaySurahGrid(surahs);
+      } catch (error) {
+        console.error('Erreur lors du chargement des sourates:', error);
+      }
+    }
+    
+    function displaySurahGrid(surahs) {
+      const grid = document.getElementById('surahGrid');
+      grid.innerHTML = '';
+      surahs.forEach(surah => {
+        const card = document.createElement('div');
+        card.classList.add('surah-card');
+        card.innerHTML = `
+          <h3>${surah.number}. ${surah.name}</h3>
+          <p>${surah.englishName}</p>
+        `;
+        card.addEventListener('click', () => {
+          currentSurahNumber = surah.number;
+          currentSurahName = surah.name;
+          loadSurahDetail(currentSurahNumber);
+        });
+        grid.appendChild(card);
+      });
+    }
+    
+    // Chargement du détail d'une sourate selon l'édition sélectionnée
+    async function loadSurahDetail(surahNumber) {
+      try {
+        // Pour les éditions textuelles, l'API retourne le texte en arabe
+        // Pour l'audio (ex: "ar.alafasy"), la structure inclut un lien audio pour chaque ayah
+        const url = `${surahDetailApi}${surahNumber}/${currentEdition}`;
+        const response = await fetch(url);
+        const data = await response.json();
+        if (data.code === 200 && data.status === "OK") {
+          const surahData = data.data;
+          displaySurahDetail(surahData);
+        } else {
+          console.error('Données non valides pour la sourate', surahNumber);
+        }
+      } catch (error) {
+        console.error('Erreur lors du chargement du détail de la sourate:', error);
+      }
+    }
+    
+    function displaySurahDetail(surahData) {
+      // Masque la liste et affiche la vue détail
+      document.getElementById('surahListView').classList.add('hidden');
+      document.getElementById('editionSelector').classList.add('hidden');
+      document.getElementById('surahDetailView').classList.remove('hidden');
+      
+      // Met à jour le titre
+      document.getElementById('surahTitle').textContent = `${surahData.number}. ${surahData.name} - ${surahData.englishName}`;
+      
+      const container = document.getElementById('contentContainer');
+      container.innerHTML = '';
+      
+      // Vérifier le type d'édition
+      if (currentEdition === 'ar.alafasy') {
+        // Edition audio : pour chaque ayah, afficher un lecteur audio
+        surahData.ayahs.forEach(ayah => {
+          const ayahDiv = document.createElement('div');
+          ayahDiv.classList.add('ayah');
+          ayahDiv.setAttribute('dir', 'rtl');
+          // Affichage du texte et du lecteur audio pour l'ayah
+          ayahDiv.innerHTML = `
+            <p><span class="ayah-marker">${ayah.numberInSurah}﴿</span> ${ayah.text}﴾</p>
+            <audio controls preload="none">
+              <source src="${ayah.audio}" type="audio/mpeg">
+              Your browser does not support the audio element.
+            </audio>
+          `;
+          container.appendChild(ayahDiv);
+        });
+      } else {
+        // Edition textuelle : afficher les ayahs en texte
+        surahData.ayahs.forEach(ayah => {
+          const p = document.createElement('p');
+          p.classList.add('ayah');
+          p.setAttribute('dir', 'rtl');
+          // Affiche l'ayah avec le symbole traditionnel
+          p.innerHTML = `<span class="ayah-marker">${ayah.numberInSurah}﴿</span> ${ayah.text}﴾`;
+          container.appendChild(p);
+        });
+      }
+    }
+    
+    // Gestion de l'édition sélectionnée
+    document.getElementById('loadQuranButton').addEventListener('click', () => {
+      const editionSelect = document.getElementById('editionSelect');
+      currentEdition = editionSelect.value;
+      // Affiche la liste des sourates
+      document.getElementById('editionSelector').classList.add('hidden');
+      document.getElementById('surahListView').classList.remove('hidden');
+      loadSurahList();
+    });
+    
+    // Boutons de retour
+    document.getElementById('backToEditionButton').addEventListener('click', () => {
+      document.getElementById('surahListView').classList.add('hidden');
+      document.getElementById('editionSelector').classList.remove('hidden');
+    });
+    
+    document.getElementById('backToListButton').addEventListener('click', () => {
+      document.getElementById('surahDetailView').classList.add('hidden');
+      document.getElementById('surahListView').classList.remove('hidden');
+    });
+    
+    // Au chargement de la page, affiche le sélecteur d'édition
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('editionSelector').classList.remove('hidden');
+    });
+    </script>
 </body>
 </html>
