@@ -21,7 +21,7 @@
     text-align:center;
     font-family: 'Arial', sans-serif;
     backdrop-filter: blur(3px);
-    background-image: linear-gradient(to right, #f8f5e680 0%, #f8f5e680 100%), url('islamic-pattern.png');
+    background: linear-gradient(rgba(3, 46, 61, 0.9), rgba(30, 26, 71, 0.7));
 }  
 html, body {
     width: 100%;
@@ -35,8 +35,8 @@ html, body {
 :root {
     --primary-color: #041b0c;
     --secondary-color: #cdaf4d;
-    --accent-color: #0d4b0e;
-    --text-color: #333;
+    --accent-color:  #8e6b33;
+    --text-color: #d7c291;
     --bg-color: #f8f5e6;
 }
 
@@ -57,12 +57,12 @@ html, body {
     top: 20px;
     left: 20px;
     font-size: 3rem;
-    color: #2c5d2c;
+    color: #532005;
     opacity: 0.1;
 }
 #coran p {
-    font-size: 1.2rem;
-    color: #444;
+    font-size: 1.9rem;
+    color: #2a0303;
     text-align: center;
     margin: 2rem auto;
     max-width: 800px;
@@ -71,15 +71,15 @@ html, body {
 
   
 .quran-link {
-    background: white;
+    background: rgb(162, 145, 145);
     padding: 1.5rem;
     border-radius: 12px;
     text-align: center;
     text-decoration: none;
-    color: #1a472a;
+    color: #3b2b06;
     font-weight: 500;
     transition: all 0.3s ease;
-    border: 2px solid #e0e0e0;
+    border: 2px solid #8c7111;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -96,7 +96,7 @@ html, body {
 .quran-link:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    border-color: #d4af37;
+    border-color:  #8c7111;
 }
 
   
@@ -118,15 +118,15 @@ section {
 
 
 h2 {
-    color: #dfbf1f;
+    color: #8e6b33;
     font-size: 35px;
 }
 h4 {
-    color: #dfbf1f;
+    color:#8e6b33;
     font-size: 35px;
 }
 h3 {
-    color: #dfbf1f;
+    color :#8e6b33;
     font-size: 35px;
 }
 form {
@@ -137,7 +137,7 @@ form {
 
 
 form button:hover {
-    background: #b4279f;
+    background: #4c2646;
 }
 
 
@@ -160,38 +160,111 @@ form button:hover {
   }
 
 
-nav ul {
+
+  nav ul {
     display: flex;
     justify-content: center;
     gap: 1.5rem;
     list-style: none;
     flex-wrap: wrap;
+    padding: 1.5rem;
+    margin: 0;
+    margin-left: 28px;
+    background: var(--background-gradient);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgb(78, 10, 10);
 }
-  
- 
+
 nav a {
-    color: #fff6f6;
+    color: var(--text-color);
     text-decoration: none;
     display: flex;
     align-items: center;
-    font-size: 25px;
-    gap: 0.5rem;
-    padding: 0.8rem 1.2rem;
-    border-radius:30px;
-    transition: all 0.3s ease;
-    border: 2px solid #bc991bbe;
-    background: rgba(0, 0, 0, 0.656);
+    font-size: 1.4rem;
+    gap: 0.8rem;
+    text-shadow: #fefff1;
+    padding: 1rem 1.8rem;
+    border-radius: 30px;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    border: 2px solid var(--secondary-color);
+    background: rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+}
+
+nav a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(232, 181, 106, 0.2),
+        transparent
+    );
+    transition: 0.5s;
 }
 
 nav a:hover {
-    background: var(--secondary-color);
-    transform: translateY(-2px);
+    background: rgba(45, 95, 93, 0.8);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(232, 181, 106, 0.3);
+}
+
+nav a:hover::before {
+    left: 100%;
+}
+
+nav a:hover img {
+    transform: scale(1.2) rotate(15deg);
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
 
 nav img {
-    width: 24px;
-    height:24px;
-    
+    width: 28px;
+    height: 28px;
+    transition: all 0.3s ease;
+    filter: brightness(1.2);
+}
+
+/* Animation au clic */
+nav a:active {
+    transform: scale(0.95);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav ul {
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    nav a {
+        font-size: 1.2rem;
+        padding: 0.8rem 1.2rem;
+    }
+
+    nav img {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Effet de surbrillance au focus */
+nav a:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(232, 181, 106, 0.5);
+}
+
+/* Style pour l'élément actif */
+nav a.active {
+    background: var(--secondary-color);
+    color: #1a1a1a;
+    font-weight: 600;
 }
  
 section {
@@ -211,9 +284,7 @@ section {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%; /* Prend toute la largeur de l'écran */
     text-align: center;
-    padding: 4rem 2rem;
     position: relative;
     margin-top: 20px;
     box-sizing: border-box;
@@ -355,16 +426,16 @@ section {
 
 button{
     display: inline-block;
-    background-color: #004d40;
-    color: #fff;
+    background-color: #adac61;
+    color: #000000;
     padding: 10px 15px;
     border-radius: 5px;
     text-decoration: none;
     margin-top: 10px;
   }
   #btn {
-    background: #1a472a;
-    color: white !important;
+    background: #8a6e3d;
+    color: rgb(0, 0, 0) !important;
     padding: 1rem 2rem;
     border: none;
     border-radius: 50px;
@@ -378,7 +449,7 @@ button{
 }
 
 #btn:hover {
-    background: #2c5d2c;
+    background: #f8f8ab;
     transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(42,93,42,0.3);
 }  @media (max-width: 768px) {
@@ -401,7 +472,9 @@ button{
 } #infos {
     max-width: 1200px;
     margin: 2rem auto;
+    color:#000000;
     padding: 2rem;
+    font-size: 1.8rem;
     background: linear-gradient(135deg, #f8f5ec 0%, #fff9f0 100%);
     border-radius: 15px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -409,7 +482,7 @@ button{
 
 .section-title {
     text-align: center;
-    color: #2a5d2a;
+    color: #af870e;
     font-size: 2.5rem;
     margin-bottom: 2rem;
     position: relative;
@@ -432,12 +505,13 @@ button{
     background: white;
     padding: 2rem;
     border-radius: 12px;
+    color:#000000;
     margin: 2rem 0;
     border-left: 5px solid #d4a537;
 }
 
 .sunnah-title {
-    color: #2a5d2a;
+    color: #8e6b33;
     font-size: 1.8rem;
     margin-bottom: 2rem;
     display: flex;
@@ -450,6 +524,7 @@ button{
     margin: 1rem 0;
     background: #f8f9fa;
     border-radius: 8px;
+    color:#000000;
     transition: transform 0.3s ease;
 }
 
@@ -459,8 +534,9 @@ button{
 
 .sunnah-item h4 {
     color: #d4a537;
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     margin-bottom: 0.5rem;
+
 }
 
 .numbered-list {
@@ -484,7 +560,7 @@ button{
     left: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    background: #d4a537;
+    background: #1a1201;
     color: white;
     width: 30px;
     height: 30px;
@@ -528,7 +604,7 @@ button{
     padding: 1.5rem;
     border-radius: 8px;
     text-align: center;
-    border-left: 4px solid #ffc107;
+    border-left: 4px solid #534005;
     margin-top: 2rem;
 }
 
@@ -550,6 +626,7 @@ button{
    padding: 4rem 2rem;
    border-radius: 20px;
    margin: 3rem auto;
+   color:#000000;
    max-width: 1200px;
    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
    position: relative;
@@ -567,7 +644,7 @@ button{
 }
 
 #prieres h2 {
-   color: #1a472a;
+    color: #8e6b33;
    font-size: 2.8rem;
    text-align: center;
    margin-bottom: 3rem;
@@ -597,6 +674,7 @@ button{
    background: white;
    padding: 2rem;
    border-radius: 15px;
+   color:#000000;
    text-align: right;
    transition: all 0.3s ease;
    border: 2px solid #e0e0e0;
@@ -620,7 +698,7 @@ button{
 
 .douaa-link {
    text-decoration: none;
-   color: #1a472a;
+   color: #8e6b33;
    font-size: 1.3rem;
    font-weight: 600;
    display: block;
@@ -628,8 +706,8 @@ button{
 }
 
 .douaa-desc {
-   color: #555;
-   font-size: 1.1rem;
+    color:#000000;
+   font-size: 1.5rem;
    line-height: 1.7;
    margin-top: 1rem;
 }
@@ -653,14 +731,16 @@ button{
     background: linear-gradient(135deg, #f8f5ec 0%, #fff9f0 100%);
     padding: 3rem 2rem;
     border-radius: 20px;
+    color:#000000;
     margin: 2rem auto;
     max-width: 1200px;
+    font-size: 1.8rem;
     box-shadow: 0 10px 30px rgba(0,0,0,0.08);
 }
 
 .section-header {
     text-align: center;
-    color: #1a472a;
+    color: #8e6b33;
     font-size: 2.5rem;
     margin-bottom: 2rem;
     position: relative;
@@ -692,6 +772,7 @@ button{
     transition: all 0.3s ease;
     border: 2px solid #e0e0e0;
     min-height: 150px;
+    font-size:2rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -713,9 +794,9 @@ button{
 }
 
 .card-description {
-    color: #555;
+    color:#000000;
     line-height: 1.7;
-    font-size: 1.1rem;
+    font-size: 1.8rem;
 }
 
 /* Section Salat */
@@ -738,7 +819,7 @@ button{
 }
 .islamic-card a:hover {
     text-decoration: none !important;
-    color: #1a472a;
+    color:#000000;
     opacity: 0.9;
 }
 
@@ -751,7 +832,10 @@ button{
         font-size: 2rem;
     }
 }
-
+h5{
+    color:#000000;
+    font-size: 28px;
+}
 
 #salat a, 
 #imsak a, 
@@ -761,26 +845,13 @@ button{
     border-bottom: none;
 }
 
-
-#ar{}
-#en{
-
-}
-
-
-
-
-
-
-
 #mon-header h1 {
     font-family: 'Amiri', cursive;
     text-align: center;
     color: #f0e6d3;
-    padding: 0.5rem 1rem; /* Réduire le padding */
-    /* Taille de la bordure */
-    border-width: 1px; /* Épaisseur de la bordure */
-    border-radius: 10px; /* Arrondi des coins */
+    padding: 0.5rem 1rem; 
+    border-width: 1px; 
+    border-radius: 10px; 
     margin: 30px;
     position: relative;
     text-shadow: 0 0 12px #000000;
@@ -803,25 +874,8 @@ button{
     backdrop-filter: blur(0.5px);
     width: 100%;
     height: 100%;
-    z-index: -1; /* Place le flou derrière le contenu */
+    z-index: -1; 
 } 
-
-
-/* smi la page p rincipale in dex ok ok mais att nchof afssa */
-
-
-#mon-header::before {
-    content: '"﷽"';
-    position: absolute;
-    top: 0;
-    left: 0;
-        pointer-events: none; /* Désactive l'interaction avec le pseudo-élément */
-    color:white;
-    width: 100%;
-    height: 100%;
-    font-size: 40px;
-}
-
 
 @keyframes twinkle {
     0%, 100% { opacity: 0.8; transform: scale(1); }
@@ -927,17 +981,104 @@ button{
         width: 100%;
     }
 }
+.ramadan-title {
+        text-align: center;
+        margin: 2rem 0;
+        position: relative;
+        padding: 1rem;
+    }
 
+    .ramadan-title .ar {
+        font-family: 'Amiri', serif;
+        font-size: 4.5rem;
+        color: #8e6b33;
+        display: block;
+        line-height: 1.2;
+        text-shadow: 2px 2px 4px rgb(228, 224, 158);
+        position: relative;
+        background: linear-gradient(to right, #8c7748, #b9bf85);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .ramadan-title .en {
+        font-family: 'Cairo', sans-serif;
+        font-size: 2rem;
+        color: #8e6b33;
+        letter-spacing: 2px;
+        text-shadow: 2px 2px 4px rgb(228, 224, 158);
+        margin-top: 1rem;
+        display: inline-block;
+        position: relative;
+        padding: 0 2rem;
+    }
+
+    .ramadan-title .en::before,
+    .ramadan-title .en::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        width: 40px;
+        height: 3px;
+        background: #c7b887;
+    }
+
+    .ramadan-title .en::before {
+        right: 100%;
+    }
+
+    .ramadan-title .en::after {
+        left: 100%;
+    }
+
+    /* Animation */
+    .ramadan-title .ar {
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .ramadan-title .en {
+        animation: fadeIn 1.5s ease-out;
+    }
+
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .ramadan-title .ar {
+            font-size: 3.5rem;
+        }
+        
+        .ramadan-title .en {
+            font-size: 2rem;
+        }
+    }
     </style>
 </head>
 <body>
     <header id="mon-header">
         <nav>     
-            <h1>
+            <div class="ramadan-title">
                 <span class="ar">رمضان كريم</span>
                 <br>
                 <span class="en">Ramadan Kareem</span>
-            </h1>
+            </div>
             <ul>
                 <li><a href="#accueil"><img src="acc.png" alt="Accueil"> الرئيسية</a></li>
                 <li><a href="#coran"><img src="cor.jpg" alt="Coran"> القرآن</a></li>
@@ -1280,13 +1421,14 @@ button{
         document.addEventListener('DOMContentLoaded', function() {
           const header = document.getElementById('mon-header');
           const images = [
-           ".png",
+             ".png",
            "2.jpg",
            "3.jpg",
-           "4.png",
            "5.png",
+           "6.png",
             "ramadan 3_lantern_1366x768.jpg",           
             "dates-ramadan.jpg",
+            "f8d91eae33e2291102e42333f664ddf4.jpg",
             "7.png"
           ];
           let currentIndex = 0;
@@ -1299,7 +1441,7 @@ button{
           setInterval(function() {
             currentIndex = (currentIndex + 1) % images.length;
             header.style.backgroundImage = `url('${images[currentIndex]}')`;
-          }, 5000);
+          }, 7000);
         });
       </script>
     <script>
