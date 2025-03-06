@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مواقيت الصلاة - الموقع الحالي</title>
+    <style>
+      body {
+          font-family: 'Amiri', serif;
+          text-align: center;
+          background: url('https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NjRf?temp_key=%96X%E9&inline=1') no-repeat center center fixed;
+          background-size: cover;
+          color: #fff;
+       
+          backdrop-filter: blur(2px);
+      }
+      h1 {
+          background: linear-gradient(145deg, #D4AF37, #B89628);
+          color: #0a0a01;
+          display: inline-block;
+          padding: 15px 30px;
+          border-radius: 50px;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+          font-family: 'Amiri', serif;
+          font-size: 2em;
+      }
+      h2 {
+          color: #D4AF37;
+          font-size: 2em;
+          margin-bottom: 20px;
+      }
+      table {
+          margin: 30px auto;
+          border-collapse: collapse;
+          width: 80%;
+          background: rgba(0, 0, 0, 0.65);
+          color: #333;
+          border-radius: 15px ;
+          border: 2px solid  #52410b;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+          overflow: hidden;
+      }
+      th, td {
+          padding: 15px;
+          border: none;
+          text-align: center;
+          font-size: 1.8em;
+      }
+      th {
+          background: #B89628;
+          color: #000000;
+          font-weight: bold;
+      }
+      tr:nth-child(odd) {
+          background: rgba(0, 0, 0, 0.65);
+          color:#fff;
+      }
+      tr:nth-child(even) {
+          background: rgba(0, 0, 0, 0.65);
+          color: #ffffff;
+      }
+      tr:hover {
+          background:#342d04;
+          cursor: pointer;
+          
+      }
+  </style>
+</head>
+<body>
+    <h1>مواقيت الصلاة -  رمضان مبارك</h1>
+    <h2 id="dateTitle">جارٍ تحديد الموقع...</h2>
+    <table id="prayerTimesTable" style="display: none;">
+        <thead>
+            <tr>
+                <th>الصلاة</th>
+                <th>الوقت</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>الإمساك</td><td id="imsak"></td></tr>
+            <tr><td>الفجر</td><td id="fajr"></td></tr>
+            <tr><td>الشروق</td><td id="sunrise"></td></tr>
+            <tr><td>الظهر</td><td id="dhuhr"></td></tr>
+            <tr><td>العصر</td><td id="asr"></td></tr>
+            <tr><td>المغرب</td><td id="maghrib"></td></tr>
+            <tr><td>العشاء</td><td id="isha"></td></tr>
+        </tbody>
+    </table>
+
+    <script>
+        // Fonction pour soustraire 10 minutes pour l'imsak
+        function subtractTenMinutes(time) {
+            const [hours, minutes] = time.split(':').map(Number);
+            const date = new Date();
+            date.setHours(hours, minutes - 10);
+            const newHours = date.getHours().toString().padStart(2, '0');
+            const newMinutes = date.getMinutes().toString().padStart(2, '0');
+            return `${newHours}:${newMinutes}`;
+        }
+
+        // Fonction pour obtenir l'emplacement via l'IP
+        function getLocationByIP() {
+            fetch('https://ipwhois.app/json/')
+                .then(response => response.json())
+                .then(data => {
+                    const city = data.city || 'مدينة غير معروفة';
+                    const countryCode = data.country_code || 'DZ';
+                    document.getElementById('dateTitle').textContent = '';
+                    getPrayerTimes(data.latitude, data.longitude);
+                })
+                .catch(error => {
+                    console.error("خطأ في الحصول على الموقع عبر IP:", error);
+                    alert("لا يمكن الحصول على الموقع عبر IP.");
+                });
+        }
+
+        // Fonction pour récupérer les horaires de prière
+        async function getPrayerTimes(latitude, longitude) {
+            const date = new Date().toISOString().split('T')[0];
+            const url = `https://api.aladhan.com/v1/timings/${date}?latitude=${latitude}&longitude=${longitude}&method=8`;
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                if (data.code !== 200) {
+                    alert("لا يمكن الحصول على مواقيت الصلاة.");
+                    return;
+                }
+                const timings = data.data.timings;
+                document.getElementById('imsak').innerText = subtractTenMinutes(timings.Fajr);
+                document.getElementById('fajr').innerText = timings.Fajr;
+                document.getElementById('sunrise').innerText = timings.Sunrise;
+                document.getElementById('dhuhr').innerText = timings.Dhuhr;
+                document.getElementById('asr').innerText = timings.Asr;
+                document.getElementById('maghrib').innerText = timings.Maghrib;
+                document.getElementById('isha').innerText = timings.Isha;
+                document.getElementById('prayerTimesTable').style.display = 'table';
+            } catch (error) {
+                console.error("خطأ:", error);
+                alert("حدث خطأ. حاول مرة أخرى.");
+            }
+        }
+
+        window.onload = getLocationByIP;
+    </script>
+</body>
+</html>
