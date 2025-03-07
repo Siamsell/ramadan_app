@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>رمضان - القرآن والمعلومات الإسلامية</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
+<meta name="viewport" content="width=1200, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="icon" type="image/x-icon" href="ramdann.jpg">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
@@ -19,6 +18,7 @@
     font-size: 20px;
     line-height: 1.8;
     text-align:center;
+    overflow-x: auto;
     font-family: 'Arial', sans-serif;
     backdrop-filter: blur(3px);
     background: linear-gradient(rgba(38, 112, 138, 0.9), rgba(30, 26, 71, 0.7));
@@ -170,8 +170,8 @@ form button:hover {
     list-style: none;
     flex-wrap: wrap;
     padding: 1.5rem;
-    margin: 0;
-    margin-left: 28px;
+    margin-top:30px;
+    margin-left:33px;
     background: var(--background-gradient);
     border-radius: 20px;
     box-shadow: 0 10px 30px rgb(204, 197, 161);
@@ -182,15 +182,16 @@ nav a {
     text-decoration: none;
     display: flex;
     align-items: center;
-    font-size: 1.4rem;
-    gap: 0.8rem;
+    font-size: 1.3rem;
+    gap: 0.5rem;
     text-shadow: #f1f6a9;
-    padding: 1rem 1.8rem;
+    padding: 1rem 1.5rem 1rem;
     border-radius: 30px;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-    border: 2px solid var(--secondary-color);
+    border: 1.5px solid var(--secondary-color);
     background: rgba(0, 0, 0, 0.5);
     position: relative;
+   margin-top: -9px;
     overflow: hidden;
     backdrop-filter: blur(8px);
 }
@@ -227,8 +228,8 @@ nav a:hover img {
 }
 
 nav img {
-    width: 28px;
-    height: 28px;
+    width: 27px;
+    height: 27px;
     transition: all 0.3s ease;
     filter: brightness(1.2);
 }
@@ -255,6 +256,7 @@ nav a:active {
         height: 24px;
     }
 }
+
 
 /* Effet de surbrillance au focus */
 nav a:focus {
@@ -299,6 +301,7 @@ section {
         position: relative; /* Évite un décalage non voulu */
         top: 50%;
         left: 50%;
+        margin-top: 10px;
         transform: translate(-50%, -50%);
         font-size: 7.5vw;
         color: rgba(240, 230, 211, 0.1);
@@ -1087,6 +1090,7 @@ h5{
                 <li><a href="#infos"><img src="https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwNDQ3ODNf?temp_key=%9A%8B%2A%B9%E7%A9%9E&inline=1" alt="Infos Ramadan"> معلومات عن رمضان</a></li>
                 <li><a href="#names-of-allah"><img src="https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NDZf?temp_key=jYZ%86%99%E0&inline=1" alt="Noms d'Allah"> أسماء الله الحسنى</a></li>
                 <li><a href="#imsak"><img src="https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NjJf?temp_key=%8Ak%1A%92%3A%60&inline=1" alt="Imsak et Iftar"> مواقيت الامساك و الافطار</a></li>
+               
                 <li><a href="#salat"><img src="https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NDlf?temp_key=rZ%1C%92%99%E0&inline=1.png" alt="Prayer Times"> مواقيت الصلاة</a></li>
               
                 <li><a href="#hadit"><img src="https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NTNf?temp_key=u%E7%28%AD%ABb%A2%7Dy%DFm%3C%F3%AAg&inline=1" alt="Hadith">اذكار يومية</a></li>
