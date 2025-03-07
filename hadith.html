@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -7,178 +7,152 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #000000;
-            --secondary-color: #d4af37;
-        }
-
-        body {
+         body {
             font-family: 'Amiri', serif;
             background: url('https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NzNf?temp_key=%AD%A9%9Au%A9%F6%D3yZ%9E%D7%AB%9F%5D%FA%EB%1E%FA%F2%3A%60&inline=1');
             text-align: center;
             color: #fff;
             backdrop-filter: blur(3px);
         }
-
-        .main-content {
-            overflow-y: auto;
-            max-height: 100vh;
-            padding: 2rem;
-        }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 2rem;
         }
 
         header {
             text-align: center;
-            padding: 40px 0;
-            border-bottom: 3px solid var(--primary-color);
-            margin-bottom: 40px;
-        }
-
-        p {
-            font-size: 3.5em;
+            padding: 20px 0;
+            border-bottom: 2px solid #d4af37;
+            margin-bottom: 20px;
         }
 
         h1 {
-            color: var(--primary-color);
-            font-size: 3.5em;
-            margin: 0;
+            font-size: 2.5em;
+            color: #d4af37;
         }
 
         .hadith-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            padding: 20px;
+            gap: 20px;
+            padding: 10px;
         }
 
         .hadith-card {
             background: #fff;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-        }
-
-        .hadith-card:hover {
-            transform: translateY(-5px);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            color: #000;
+            text-align: right;
         }
 
         .hadith-number {
             font-size: 1.1em;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
+            color: #d4af37;
+            margin-bottom: 10px;
             font-weight: bold;
         }
 
         .arabic-text {
-            font-size: 1.4em;
-            color: var(--primary-color);
+            font-size: 1.3em;
             text-align: justify;
-            margin-bottom: 20px;
-            line-height: 2;
+            margin-bottom: 10px;
+            line-height: 1.8;
         }
 
         .translation {
-            font-size: 1.1em;
+            font-size: 1em;
             color: #555;
-            border-right: 3px solid var(--secondary-color);
-            padding-right: 15px;
-            margin-top: 15px;
+            border-right: 3px solid #d4af37;
+            padding-right: 10px;
         }
 
         .loading {
             text-align: center;
-            font-size: 3.5em;
-            padding: 50px;
-            color: rgb(255, 255, 255);
+            font-size: 1.5em;
+            color: #d4af37;
         }
 
-        @media (max-width: 768px) {
-            .hadith-grid {
-                grid-template-columns: 1fr;
-            }
-            h1 {
-                font-size: 2em;
-            }
+        .load-btn {
+            background-color: #d4af37;
+            color: #1a1a1a;
+            font-size: 1.1em;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            border: none;
+            margin-top: 20px;
+        }
+
+        .load-btn:hover {
+            background-color: #b8962e;
         }
     </style>
 </head>
 <body>
-    <div class="main-content">
-        <div class="container">
-            <header>
-                <h1>سنن أبي داود</h1>
-                <p>أحاديث النبي محمد صلى الله عليه وسلم</p>
-            </header>
-            
-            <div class="hadith-grid" id="hadithContainer">
-                <div class="loading">جاري تحميل الأحاديث...</div>
-            </div>
+    <div class="container">
+        <header>
+            <h1>سنن أبي داود</h1>
+            <p>أحاديث النبي محمد صلى الله عليه وسلم</p>
+        </header>
+        
+        <div class="hadith-grid" id="hadithContainer">
+            <div class="loading">جاري تحميل الأحاديث...</div>
         </div>
-<script>
-        const API_VERSION = '1';
-        const ARABIC_EDITION = 'ara-abudawud'; 
-        const ENGLISH_EDITION = 'eng-abudawud';
-        
-        const API_URL_AR = `https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@${API_VERSION}/editions/${ARABIC_EDITION}.json`;
-        const API_URL_EN = `https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@${API_VERSION}/editions/${ENGLISH_EDITION}.json`;
-        
-        async function fetchHadiths() {
+        <button id="loadMore" class="load-btn">تحميل المزيد</button>
+    </div>
+
+    <script>
+        let startIndex = 0;
+        const batchSize = 20;
+        let dataAr = [], dataEn = [];
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            const API_VERSION = '1';
+            const ARABIC_EDITION = 'ara-abudawud';
+            const ENGLISH_EDITION = 'eng-abudawud';
+            const API_URL_AR = `https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@${API_VERSION}/editions/${ARABIC_EDITION}.json`;
+            const API_URL_EN = `https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@${API_VERSION}/editions/${ENGLISH_EDITION}.json`;
+
             try {
-                const responseAr = await fetch(API_URL_AR);
-                const responseEn = await fetch(API_URL_EN);
-                if (!responseAr.ok || !responseEn.ok) {
-                    throw new Error('Erreur de chargement des hadiths');
-                }
-        
-                const dataAr = await responseAr.json();
-                const dataEn = await responseEn.json();
-        
-                console.log("Données en arabe:", dataAr);
-                console.log("Données en anglais:", dataEn);
-        
-                if (dataAr.hadiths && dataEn.hadiths) {
-                    displayHadiths(dataAr.hadiths, dataEn.hadiths);
-                } else {
-                    throw new Error('Structure inattendue des données');
-                }
+                const [resAr, resEn] = await Promise.all([fetch(API_URL_AR), fetch(API_URL_EN)]);
+                if (!resAr.ok || !resEn.ok) throw new Error('فشل تحميل البيانات');
+
+                dataAr = await resAr.json();
+                dataEn = await resEn.json();
+                document.getElementById('hadithContainer').innerHTML = '';
+
+                loadHadiths(); // Charger les premiers hadiths
+
             } catch (error) {
-                console.error('Erreur:', error);
-                document.getElementById('hadithContainer').innerHTML = `
-                    <div class="error">
-                        <p>حدث خطأ في تحميل الأحاديث</p>
-                        <small>${error.message}</small>
-                    </div>`;
+                document.getElementById('hadithContainer').innerHTML = `<p class="loading" style="color: red;">حدث خطأ في تحميل الأحاديث</p>`;
             }
-        }
-        
-        function displayHadiths(hadithsAr, hadithsEn) {
-            const container = document.getElementById('hadithContainer');
-            container.innerHTML = '';
-        
-            hadithsAr.forEach((hadithAr, index) => {
-                const hadithEn = hadithsEn[index] || {};
+        });
+
+        function loadHadiths() {
+            const hadithContainer = document.getElementById('hadithContainer');
+            for (let i = startIndex; i < startIndex + batchSize && i < dataAr.hadiths.length; i++) {
+                const ar = dataAr.hadiths[i];
+                const en = dataEn.hadiths[i] || {};
                 const card = document.createElement('div');
                 card.className = 'hadith-card';
                 card.innerHTML = `
-                    <div class="hadith-number">الحديث رقم: ${hadithAr.hadithnumber || 'غير متوفر'}</div>
-                    <div class="arabic-text">${hadithAr.text || 'النص غير متوفر'}</div>
-                    <div class="translation">${hadithEn.text || 'الترجمة غير متوفرة'}</div>
+                    <div class="hadith-number">الحديث رقم: ${ar.hadithnumber || 'غير متوفر'}</div>
+                    <div class="arabic-text">${ar.text || 'النص غير متوفر'}</div>
+                    <div class="translation">${en.text || 'الترجمة غير متوفرة'}</div>
                 `;
-                container.appendChild(card);
-            });
+                hadithContainer.appendChild(card);
+            }
+            startIndex += batchSize;
+
+            if (startIndex >= dataAr.hadiths.length) {
+                document.getElementById('loadMore').style.display = 'none';
+            }
         }
-        
-        // Charger les hadiths au démarrage
-        fetchHadiths();
-        
-        </script>
-        
-             
-    </div>
+
+        document.getElementById('loadMore').addEventListener('click', loadHadiths);
+    </script>
 </body>
 </html>
