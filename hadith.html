@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -13,19 +13,19 @@
         }
 
         body {
-      font-family: 'Amiri', serif;
-      background: url('https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NzNf?temp_key=%AD%A9%9Au%A9%F6%D3yZ%9E%D7%AB%9F%5D%FA%EB%1E%FA%F2%3A%60&inline=1');
-      text-align: center;
-      color: #fff;
-      backdrop-filter: blur(3px);
-  
-    }
+            font-family: 'Amiri', serif;
+            background: url('https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NzNf?temp_key=%AD%A9%9Au%A9%F6%D3yZ%9E%D7%AB%9F%5D%FA%EB%1E%FA%F2%3A%60&inline=1');
+            text-align: center;
+            color: #fff;
+            backdrop-filter: blur(3px);
+        }
 
-.main-content {
-  overflow-y: auto;
-  max-height: 100vh;
-  padding: 2rem;
-}
+        .main-content {
+            overflow-y: auto;
+            max-height: 100vh;
+            padding: 2rem;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -37,9 +37,11 @@
             border-bottom: 3px solid var(--primary-color);
             margin-bottom: 40px;
         }
-p{
-    font-size: 3.5em;
-}
+
+        p {
+            font-size: 3.5em;
+        }
+
         h1 {
             color: var(--primary-color);
             font-size: 3.5em;
@@ -92,14 +94,13 @@ p{
             text-align: center;
             font-size: 3.5em;
             padding: 50px;
-            color:rgb(255, 255, 255);
+            color: rgb(255, 255, 255);
         }
 
         @media (max-width: 768px) {
             .hadith-grid {
                 grid-template-columns: 1fr;
             }
-            
             h1 {
                 font-size: 2em;
             }
@@ -108,54 +109,76 @@ p{
 </head>
 <body>
     <div class="main-content">
-    <div class="container">
-        <header>
-            <h1>سنن أبي داود</h1>
-            <p>أحاديث النبي محمد صلى الله عليه وسلم</p>
-        </header>
-        
-        <div class="hadith-grid" id="hadithContainer">
-            <div class="loading">جاري تحميل الأحاديث...</div>
+        <div class="container">
+            <header>
+                <h1>سنن أبي داود</h1>
+                <p>أحاديث النبي محمد صلى الله عليه وسلم</p>
+            </header>
+            
+            <div class="hadith-grid" id="hadithContainer">
+                <div class="loading">جاري تحميل الأحاديث...</div>
+            </div>
         </div>
-    </div>
-
-    <script>
-        const API_URL = 'https://hadis-api-id.vercel.app/hadith/abu-dawud?page=2&limit=300';
-
+<script>
+        const API_VERSION = '1';
+        const ARABIC_EDITION = 'ara-abudawud'; 
+        const ENGLISH_EDITION = 'eng-abudawud';
+        
+        const API_URL_AR = `https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@${API_VERSION}/editions/${ARABIC_EDITION}.json`;
+        const API_URL_EN = `https://cdn.jsdelivr.net/gh/fawazahmed0/hadith-api@${API_VERSION}/editions/${ENGLISH_EDITION}.json`;
+        
         async function fetchHadiths() {
             try {
-                const response = await fetch(API_URL);
-                const data = await response.json();
-                displayHadiths(data.items);
+                const responseAr = await fetch(API_URL_AR);
+                const responseEn = await fetch(API_URL_EN);
+                if (!responseAr.ok || !responseEn.ok) {
+                    throw new Error('Erreur de chargement des hadiths');
+                }
+        
+                const dataAr = await responseAr.json();
+                const dataEn = await responseEn.json();
+        
+                console.log("Données en arabe:", dataAr);
+                console.log("Données en anglais:", dataEn);
+        
+                if (dataAr.hadiths && dataEn.hadiths) {
+                    displayHadiths(dataAr.hadiths, dataEn.hadiths);
+                } else {
+                    throw new Error('Structure inattendue des données');
+                }
             } catch (error) {
-                console.error('Error:', error);
-                hadithContainer.innerHTML = `
+                console.error('Erreur:', error);
+                document.getElementById('hadithContainer').innerHTML = `
                     <div class="error">
                         <p>حدث خطأ في تحميل الأحاديث</p>
                         <small>${error.message}</small>
                     </div>`;
             }
         }
-
-        function displayHadiths(hadiths) {
+        
+        function displayHadiths(hadithsAr, hadithsEn) {
             const container = document.getElementById('hadithContainer');
             container.innerHTML = '';
-            
-            hadiths.forEach(hadith => {
+        
+            hadithsAr.forEach((hadithAr, index) => {
+                const hadithEn = hadithsEn[index] || {};
                 const card = document.createElement('div');
                 card.className = 'hadith-card';
                 card.innerHTML = `
-                    <div class="hadith-number">الحديث رقم: ${hadith.number}</div>
-                    <div class="arabic-text">${hadith.arab}</div>
-                    <div class="translation">${hadith.id}</div>
+                    <div class="hadith-number">الحديث رقم: ${hadithAr.hadithnumber || 'غير متوفر'}</div>
+                    <div class="arabic-text">${hadithAr.text || 'النص غير متوفر'}</div>
+                    <div class="translation">${hadithEn.text || 'الترجمة غير متوفرة'}</div>
                 `;
                 container.appendChild(card);
             });
         }
-
-        // Initial load
+        
+        // Charger les hadiths au démarrage
         fetchHadiths();
-    </script>
+        
+        </script>
+        
+             
     </div>
 </body>
 </html>
