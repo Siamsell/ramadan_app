@@ -42,16 +42,14 @@ html, body {
                 rgba(197, 163, 104, 0.1) 10px, 
                 rgba(197, 163, 104, 0.1) 20px);
         }
-body {
-            font-family: 'El Messiri', sans-serif;
-            background: var(--deep-navy) url('https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NzNf?temp_key=%AD%A9%9Au%A9%F6%D3yZ%9E%D7%AB%9F%5D%FA%EB%1E%FA%F2%3A%60&inline=1');
-            min-height: 100vh;
-            display: grid;
-            place-items: center;
-            position: relative;
-            overflow-x: hidden;
-        }
-
+        body {
+      font-family: 'Amiri', serif;
+      background: url('https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NzNf?temp_key=%AD%A9%9Au%A9%F6%D3yZ%9E%D7%AB%9F%5D%FA%EB%1E%FA%F2%3A%60&inline=1')no-repeat center center fixed;
+      background-size: cover;
+      text-align: center;
+      color: #fff;
+      backdrop-filter: blur(2px);
+    }
         .title {
     font-family: 'Amiri', 'El Messiri', sans-serif;
     font-size: 2.8rem;
@@ -181,7 +179,7 @@ body {
   <div>Alpha: <span id="direction"></span></div>
 </div>
 <div id="notice"></div>
-</div>
+
       <script id="rendered-js" >
 document.addEventListener('DOMContentLoaded', function (event) {
 
@@ -216,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function (event) {
 //# sourceURL=pen.js
     </script>
 
-  
+</div>
 </body>
 
 </html>
