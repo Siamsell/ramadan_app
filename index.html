@@ -38,12 +38,15 @@
     color: var(--text-color);
     font-size: 20px;
     line-height: 1.8;
+              position: relative;
+    width: 100vw;
+    overflow-x: hidden;
     text-align:center;
     font-family: 'Arial', sans-serif;
     backdrop-filter: blur(3px);
     background: linear-gradient(rgba(38, 112, 138, 0.9), rgba(30, 26, 71, 0.7));
 }  
-body {
+html,body {
     width: 100%;
     height: 100%;
     overflow-x: hidden; 
@@ -51,10 +54,7 @@ body {
     padding: 0;
     box-sizing: border-box;
 }
-        html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 4rem; /* لمنع إخفاء المحتوى خلف الـ header */
-}
+
 
 :root {
     --primary-color: #041b0c;
@@ -783,9 +783,13 @@ button{
     height: 3px;
     background: #d4af37;
 }
+        html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px; }
 
 .grid-container {
     display: grid;
+     direction: rtl;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
@@ -1121,7 +1125,7 @@ h5{
            </ul>
         </nav>
     </header>
-
+  <main class="container mx-auto px-4 py-8 min-h-screen">
     <section id="accueil">
         <h2>مرحبا بكم في رحاب رمضان</h2>
         <p>هذا الموقع يرافقكم خلال الشهر الفضيل بموارد إسلامية رمضان مبارك للجميع  <br>لا تنسونا من صالح دعائكم</p>
@@ -1566,5 +1570,6 @@ showQuote();
 setInterval(showQuote, 50000); 
 
     </script>
+            </main>          
 </body>
 </html>
