@@ -39,13 +39,19 @@
     font-size: 20px;
     line-height: 1.8;
               position: relative;
-
+ transform: translate3d(0,0,0); 
+    overscroll-behavior-y: contain;
     overflow-x: hidden;
     text-align:center;
     font-family: 'Arial', sans-serif;
     backdrop-filter: blur(3px);
     background: linear-gradient(rgba(38, 112, 138, 0.9), rgba(30, 26, 71, 0.7));
 }  
+        * {
+    will-change: transform; 
+    backface-visibility: hidden;
+    transform: translateZ(0);}
+
 html,body {
     width: 100%;
     height: 100%;
@@ -317,7 +323,12 @@ section {
     margin-top:5px;
     border-bottom: 3px solid #c19b53;
 }
-
+@media (prefers-reduced-motion: no-preference) {
+    html.is-scrolling * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
     #accueil::before {
         content: '﷽';
         font-family: 'Amiri', serif;
@@ -525,7 +536,12 @@ button{
     width: 200px;
     height: 3px;
     background: #d4a537;
+}section, div, article {
+    contain: strict;
+    content-visibility: auto;
 }
+
+
 
 /* Sections de contenu */
 .sunnah-section {
@@ -1470,7 +1486,7 @@ h5{
           setInterval(function() {
             currentIndex = (currentIndex + 1) % images.length;
             header.style.backgroundImage = `url('${images[currentIndex]}')`;
-          }, 7000);
+          }, 8000);
         });
       </script>
     <script>
@@ -1568,6 +1584,15 @@ function showQuote() {
 
 showQuote();
 setInterval(showQuote, 50000); 
+// 
+let isScrolling;
+window.addEventListener('scroll', () => {
+    document.documentElement.classList.add('is-scrolling');
+    clearTimeout(isScrolling);
+    isScrolling = setTimeout(() => {
+        document.documentElement.classList.remove('is-scrolling');
+    }, 100);
+}, {passive: true});
 
     </script>
             </main>          
