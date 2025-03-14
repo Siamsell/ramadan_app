@@ -323,12 +323,7 @@ section {
     margin-top:5px;
     border-bottom: 3px solid #c19b53;
 }
-@media (prefers-reduced-motion: no-preference) {
-    html.is-scrolling * {
-        transition: none !important;
-        animation: none !important;
-    }
-}
+
     #accueil::before {
         content: '﷽';
         font-family: 'Amiri', serif;
@@ -435,7 +430,7 @@ section {
     }
 
     /* Responsive */
-    @media (max-width: 768px) {
+    section (max-width: 768px) {
         #accueil {
             padding: 1rem;
         }
@@ -536,11 +531,7 @@ button{
     width: 200px;
     height: 3px;
     background: #d4a537;
-}section, div, article {
-    contain: strict;
-    content-visibility: auto;
 }
-
 
 
 /* Sections de contenu */
@@ -1584,15 +1575,7 @@ function showQuote() {
 
 showQuote();
 setInterval(showQuote, 50000); 
-// 
-let isScrolling;
-window.addEventListener('scroll', () => {
-    document.documentElement.classList.add('is-scrolling');
-    clearTimeout(isScrolling);
-    isScrolling = setTimeout(() => {
-        document.documentElement.classList.remove('is-scrolling');
-    }, 100);
-}, {passive: true});
+
 
     </script>
             </main>          
