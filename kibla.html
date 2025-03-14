@@ -1,240 +1,163 @@
-
 <!DOCTYPE html>
-<html lang="en" >
-
+<html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  
-
-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png" />
-
-    <meta name="apple-mobile-web-app-title" content="CodePen">
-
-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico" />
-
-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111" />
-
-
-
-  
-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
-
- <title>اتجاه القبلة</title>
-
-    <link rel="canonical" href="https://codepen.io/barzik/pen/WpbJWM">
-  
-  
-  
-  
-<style>
-@import url("https://fonts.googleapis.com/css?family=Wallpoet");
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-:root {
-            --islamic-gold: #c5a368;
-            --deep-navy: #c3d1db;
-            --arabesque-pattern: repeating-linear-gradient(45deg, 
-                transparent, 
-                transparent 10px, 
-                rgba(197, 163, 104, 0.1) 10px, 
-                rgba(197, 163, 104, 0.1) 20px);
-        }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>السنن الرواتب - رمضان</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
+    <style>
         body {
-      font-family: 'Amiri', serif;
-      background: url('https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NzNf?temp_key=%AD%A9%9Au%A9%F6%D3yZ%9E%D7%AB%9F%5D%FA%EB%1E%FA%F2%3A%60&inline=1')no-repeat center center fixed;
-      background-size: cover;
-      text-align: center;
-      color: #fff;
-      backdrop-filter: blur(2px);
-    }
-        .title {
-    font-family: 'Amiri', 'El Messiri', sans-serif;
-    font-size: 2.8rem;
-    color: #c5a368;
-    text-align: center;
-    position: relative;
-    margin: 2rem 0;
-    padding: 1rem 0;
-    background: linear-gradient(45deg, #c5a368 20%, #e8d39f 50%, #c5a368 80%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 2px 4px rgba(10, 43, 70, 0.3);
-    animation: title-glow 3s ease-in-out infinite alternate;
-}
-
-.title::before,
-.title::after {
-    content: '';
-    position: absolute;
-    width: 40%;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, #c5a368, transparent);
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.title::before {
-    top: 0;
-}
-
-.title::after {
-    bottom: 0;
-}
-
-
-.compass {
-  position: relative;
-  width: 260px;
-  height: 260px;
-  margin: 20px auto;
-  background: #ebe8e8;
-  padding: 20px;
-  border-radius: 40px;
-  border: 5px solid #f0ebeb;
-  overflow: hidden;
-}
-
-.compass .disc {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 200;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYWFnXzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iODg1LjM4NnB4IiBoZWlnaHQ9Ijg4NS4zODVweCIgdmlld0JveD0iMCAwIDg4NS4zODYgODg1LjM4NSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgODg1LjM4NiA4ODUuMzg1IiB4bWw6c3BhY2U9InByZXNlcnZlIj48Y2lyY2xlIGZpbGw9IiNCRTE2MjIiIGN4PSI0NDIuNjkyIiBjeT0iNDQyLjY5MyIgcj0iNDI1LjYyMiIvPjxjaXJjbGUgZmlsbD0iIzQwOEFBNyIgY3g9IjQ0Mi42OTMiIGN5PSI0NDIuNjkzIiByPSIzODYuOTI5Ii8+PGNpcmNsZSBmaWxsPSJub25lIiBzdHJva2U9IiMxQzc4OTQiIHN0cm9rZS13aWR0aD0iMzcwIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IjI4LjU3MzUsMjcuNTg4MiIgY3g9IjQ0Mi42OTIiIGN5PSI0NDIuNjkzIiByPSIyNTAuMjY2Ii8+PGNpcmNsZSBmaWxsPSJub25lIiBzdHJva2U9IiM0MDhBQTciIHN0cm9rZS13aWR0aD0iMjAiIHN0cm9rZS1saW5lam9pbj0iYmV2ZWwiIGN4PSI0NDIuNjkzIiBjeT0iNDQyLjY5MyIgcj0iMzkwLjU2NiIvPjxwYXRoIGZpbGw9IiNGMUYyQzQiIGQ9Ik00NDIuNjkzLDI2YzIzMC4xMzIsMCw0MTYuNjkyLDE4Ni41Niw0MTYuNjkyLDQxNi42OTNjMCwyMzAuMTM0LTE4Ni41NjEsNDE2LjY5Mi00MTYuNjkyLDQxNi42OTJDMjEyLjU2LDg1OS4zODUsMjYsNjcyLjgyNywyNiw0NDIuNjkzQzI2LDIxMi41NiwyMTIuNTYsMjYsNDQyLjY5MywyNiBNNDQyLjY5MywwYy01OS43NTIsMC0xMTcuNzMsMTEuNzA4LTE3Mi4zMjQsMzQuOGMtNTIuNzE5LDIyLjI5OC0xMDAuMDYsNTQuMjE0LTE0MC43MDcsOTQuODYyQzg5LjAxNCwxNzAuMzEsNTcuMDk4LDIxNy42NSwzNC44LDI3MC4zNjlDMTEuNzA4LDMyNC45NjMsMCwzODIuOTQxLDAsNDQyLjY5M3MxMS43MDgsMTE3LjczLDM0LjgsMTcyLjMyNGMyMi4yOTgsNTIuNzE5LDU0LjIxNCwxMDAuMDYsOTQuODYyLDE0MC43MDdjNDAuNjQ3LDQwLjY0Nyw4Ny45ODgsNzIuNTYzLDE0MC43MDcsOTQuODYxYzU0LjU5NCwyMy4wOTIsMTEyLjU3MiwzNC44LDE3Mi4zMjQsMzQuOHMxMTcuNzI5LTExLjcwOCwxNzIuMzIzLTM0LjhjNTIuNzE5LTIyLjI5OCwxMDAuMDYtNTQuMjE0LDE0MC43MDctOTQuODYxczcyLjU2NC04Ny45ODgsOTQuODYyLTE0MC43MDdjMjMuMDkyLTU0LjU5NCwzNC44LTExMi41NzIsMzQuOC0xNzIuMzI0cy0xMS43MDgtMTE3LjczLTM0LjgtMTcyLjMyNGMtMjIuMjk4LTUyLjcxOS01NC4yMTUtMTAwLjA1OS05NC44NjItMTQwLjcwN0M3MTUuMDc2LDg5LjAxNCw2NjcuNzM1LDU3LjA5OCw2MTUuMDE3LDM0LjhDNTYwLjQyMywxMS43MDgsNTAyLjQ0NCwwLDQ0Mi42OTMsMEw0NDIuNjkzLDB6Ii8+PHBhdGggZmlsbD0iI0YxRjJDNCIgZD0iTTQ0Mi42OTMsNTAuMTY3YzUyLjk5OSwwLDEwNC40MDIsMTAuMzc1LDE1Mi43ODIsMzAuODM4YzQ2LjczOSwxOS43NjksODguNzIsNDguMDc0LDEyNC43NzQsODQuMTI5YzM2LjA1NiwzNi4wNTYsNjQuMzYsNzguMDM2LDg0LjEzLDEyNC43NzVjMjAuNDYzLDQ4LjM3OSwzMC44MzgsOTkuNzgzLDMwLjgzOCwxNTIuNzgzcy0xMC4zNzUsMTA0LjQwMy0zMC44MzgsMTUyLjc4M2MtMTkuNzcsNDYuNzM5LTQ4LjA3NCw4OC43MTktODQuMTMsMTI0Ljc3NGMtMzYuMDU1LDM2LjA1NS03OC4wMzUsNjQuMzYtMTI0Ljc3NCw4NC4xM2MtNDguMzgsMjAuNDYyLTk5Ljc4MywzMC44MzgtMTUyLjc4MiwzMC44MzhjLTUzLDAtMTA0LjQwMy0xMC4zNzYtMTUyLjc4My0zMC44MzhjLTQ2Ljc0LTE5Ljc3LTg4LjcyLTQ4LjA3NS0xMjQuNzc1LTg0LjEzYy0zNi4wNTYtMzYuMDU2LTY0LjM2MS03OC4wMzYtODQuMTMtMTI0Ljc3NWMtMjAuNDYzLTQ4LjM3OS0zMC44MzgtOTkuNzgzLTMwLjgzOC0xNTIuNzgyUzYwLjU0MiwzMzguMjksODEuMDA1LDI4OS45MWMxOS43NjktNDYuNzM5LDQ4LjA3NS04OC43Miw4NC4xMy0xMjQuNzc1YzM2LjA1NS0zNi4wNTYsNzguMDM2LTY0LjM2MSwxMjQuNzc1LTg0LjEzQzMzOC4yOSw2MC41NDIsMzg5LjY5NCw1MC4xNjcsNDQyLjY5Myw1MC4xNjcgTTQ0Mi42OTMsMzAuMTY3Yy0yMjcuODMyLDAtNDEyLjUyNywxODQuNjk0LTQxMi41MjcsNDEyLjUyNnMxODQuNjk1LDQxMi41MjUsNDEyLjUyNyw0MTIuNTI1YzIyNy44MzEsMCw0MTIuNTI0LTE4NC42OTMsNDEyLjUyNC00MTIuNTI1UzY3MC41MjQsMzAuMTY3LDQ0Mi42OTMsMzAuMTY3TDQ0Mi42OTMsMzAuMTY3eiIvPjxwb2x5Z29uIGZpbGw9IiMxQzc4OTQiIHBvaW50cz0iNTAwLjE0NSwzODUuMjQzIDYwNS4xOTIsNDQyLjY5MSA1MDAuMTQ3LDUwMC4xNDUgNDQyLjY5Miw2MDUuMTk0IDM4NS4yNDIsNTAwLjE0NiAyODAuMTkzLDQ0Mi42OTQgMzg1LjI0MSwzODUuMjM3IDQ0Mi42OTIsMjgwLjE5MSIvPjxwb2x5Z29uIGZpbGw9IiM0MDhBQTciIHBvaW50cz0iNDQyLjY5NCwzNjEuNDQ1IDU1Ny41OTcsMzI3Ljc4NyA1MjMuOTQ0LDQ0Mi42OTIgNTU3LjU5OSw1NTcuNTk4IDQ0Mi42OTMsNTIzLjk0MiAzMjcuNzksNTU3LjU5OCAzNjEuNDQyLDQ0Mi42OSAzMjcuNzg3LDMyNy43ODciLz48cG9seWdvbiBmaWxsPSIjNDA4QUE3IiBwb2ludHM9IjM5OC41MDEsMzk4LjUgNDQyLjY5MiwzMTcuNjkzIDQ4Ni44ODgsMzk4LjQ5OCA1NjcuNjk0LDQ0Mi42OTMgNDg2Ljg4OCw0ODYuODg2IDQ0Mi42OTQsNTY3LjY5MyAzOTguNDk3LDQ4Ni44ODYgMzE3LjY5Miw0NDIuNjkzIi8+PHBvbHlnb24gZmlsbD0iIzFDNzg5NCIgcG9pbnRzPSI0NDIuNjk0LDM4MC4xOTUgNTMxLjA4MSwzNTQuMzA0IDUwNS4xOTQsNDQyLjY5MiA1MzEuMDgyLDUzMS4wODIgNDQyLjY5NCw1MDUuMTkyIDM1NC4zMDYsNTMxLjA4MiAzODAuMTkyLDQ0Mi42OTEgMzU0LjMwNCwzNTQuMzA0Ii8+PHRleHQgdHJhbnNmb3JtPSJtYXRyaXgoMSAwIDAgMSA4NS43NjM3IDQ1OS44Nzc0KSIgZmlsbD0iI0YxRjJDNCIgZm9udC1mYW1pbHk9IidDZW50dXJ5JyIgZm9udC1zaXplPSI2MiI+VzwvdGV4dD48dGV4dCB0cmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAxIDQxNy40Mjk3IDc4MC42MDk5KSIgZmlsbD0iI0YxRjJDNCIgZm9udC1mYW1pbHk9IidDZW50dXJ5JyIgZm9udC1zaXplPSI2MiI+UzwvdGV4dD48dGV4dCB0cmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAxIDc0OS4wOTU3IDQ1OS44Nzc0KSIgZmlsbD0iI0YxRjJDNCIgZm9udC1mYW1pbHk9IidDZW50dXJ5JyIgZm9udC1zaXplPSI2MiI+RTwvdGV4dD48dGV4dCB0cmFuc2Zvcm09Im1hdHJpeCgxIDAgMCAxIDQxNy40Mjk3IDEzOS4xNDUpIiBmaWxsPSIjRjFGMkM0IiBmb250LWZhbWlseT0iJ0NlbnR1cnknIiBmb250LXNpemU9IjYyIj5OPC90ZXh0Pjwvc3ZnPg==);
-  width: 260px;
-  height: 260px;
-  background-size: 100%;
-}
-
-.compass .arrow {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  z-index: 1000;
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGlkPSJMYWFnXzIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB3aWR0aD0iODg1LjM4N3B4IiBoZWlnaHQ9Ijg4NS4zODVweCIgdmlld0JveD0iMCAwIDg4NS4zODcgODg1LjM4NSIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgODg1LjM4NyA4ODUuMzg1IiB4bWw6c3BhY2U9InByZXNlcnZlIj48bGluZSBmaWxsPSJub25lIiBzdHJva2U9IiMxQzc4OTQiIHN0cm9rZS13aWR0aD0iNS42Mjg1IiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHgxPSI0NDYuMTE0IiB5MT0iMzg2LjMxNCIgeDI9IjQ0Ni4xMTQiIHkyPSI0OTguNCIvPjxwb2x5Z29uIGZpbGw9IiMxQzc4OTQiIHBvaW50cz0iNDAzLjY5Niw0NDAuNTk0IDQ0Ni4xMTQsMTI3LjIwNyA0ODguNTMxLDQ0MC41OTQiLz48cG9seWdvbiBmaWxsPSIjMUM3ODk0IiBwb2ludHM9IjQwMy42OTcsNDQwLjM1NyA0NDYuMTE0LDc1OC4wMTUgNDg4LjUzLDQ0MC4zNTciLz48Y2lyY2xlIGZpbGw9IiMxQzc4OTQiIGN4PSI0NDYuMTE1IiBjeT0iNDQ0LjExIiByPSIxMi41MDEiLz48Y2lyY2xlIGZpbGw9IiMxQzc4OTQiIGN4PSI0NDYuMTE0IiBjeT0iNDQ0LjExIiByPSI5Ii8+PGxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjQkUxNjIyIiBzdHJva2Utd2lkdGg9IjUuNjI4NSIgc3Ryb2tlLW1pdGVybGltaXQ9IjEwIiB4MT0iNDQyLjEwNiIgeTE9IjM4Ni4zMTQiIHgyPSI0NDIuMTA1IiB5Mj0iNDk4LjQiLz48cG9seWdvbiBmaWxsPSIjQkUxNjIyIiBwb2ludHM9IjM5OS42ODgsNDQwLjU5NCA0NDIuMTA2LDEyNy4yMDggNDg0LjUyMiw0NDAuNTk0Ii8+PHBvbHlnb24gZmlsbD0iI0Y2RjZGNiIgcG9pbnRzPSIzOTkuNjg4LDQ0MC4zNTYgNDQyLjEwNSw3NTguMDE0IDQ4NC41MjIsNDQwLjM1OCIvPjxjaXJjbGUgZmlsbD0iIzFDNzg5NCIgY3g9IjQ0Mi4xMDYiIGN5PSI0NDQuMTExIiByPSIxMi41MDEiLz48Y2lyY2xlIGZpbGw9IiM0MDhBQTciIGN4PSI0NDIuMTA2IiBjeT0iNDQ0LjExMSIgcj0iOSIvPjwvc3ZnPg==);
-  width: 260px;
-  height: 260px;
-  background-size: 100%;
-}
-.orientation-data {
-      margin-top: 20px;
-      font-size: 1.8rem;
-      color: #a3e87a;
-    }
-    .orientation-data div {
-      margin: 5px 0;
-    }
-.container {
-            background: linear-gradient(145deg, rgba(10, 43, 70, 0.95), rgba(10, 43, 70, 0.85));
-            border: 2px solid var(--islamic-gold);
-            border-radius: 1.5rem;
-            padding: 2.5rem;
-            box-shadow: 0 0 40px rgba(197, 163, 104, 0.2);
-            position: relative;
-            overflow: hidden;
-            margin: 1rem;
+            font-family: 'Amiri', serif;
+            background: url('islamic-pattern.png') repeat;
         }
-
-        .container::before {
+        .islamic-border {
+            border: 2px solid #2c594f;
+            position: relative;
+            padding: 1rem;
+        }
+        .islamic-border::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: var(--arabesque-pattern);
-            opacity: 0.15;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid #d4af37;
             pointer-events: none;
         }
-        #notice {
-      margin-top: 10px;
-      font-size: 1rem;
-      color: #f39c12;
-    }
-    .footer {
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px 0;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            font-size:25px;
+        .hadith-box {
+            background: #f5f3e4;
+            border-right: 5px solid #2c594f;
+            padding: 1.5rem;
+            margin: 1rem 0;
         }
-        .footer a {
-            color: #c5a368;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-        }
-
-</style>
-
-  <script>
-  window.console = window.console || function(t) {};
-</script>
-
-  
-  
+    </style>
 </head>
+<body class="bg-amber-50">
+    <header class="bg-emerald-800 text-white text-center py-8 shadow-xl">
+        <div class="container mx-auto">
+            <h1 class="text-4xl font-bold mb-4">السنن الرواتب في رمضان</h1>
+            <p class="text-xl">"مَن صلَّى ثِنتَي عشرةَ رَكْعةً في يومٍ وليلةٍ، بُنِيَ له بيتٌ في الجنة"</p>
+        </div>
+    </header>
 
-<body translate="no">
-  <div class="container">
-  <h1 class="title"> _اتجاه القبلة_</h1>
-<div class="compass">
-  <div class="arrow"  id="compass"></div>
-  <div class="disc" id="compassDiscImg"></div>
-</div>
- 
-<div class="orientation-data">
-  <div>Beta: <span id="tiltFB"></span></div>
-  <div>Gamma: <span id="tiltLR"></span></div>
-  <div>Alpha: <span id="direction"></span></div>
-</div>
-<div id="notice"></div>
+    <main class="container mx-auto px-4 py-8">
+        <!-- مراتب التفضيل -->
+        <section class="bg-white rounded-lg shadow-lg p-6 mb-8 islamic-border">
+            <h2 class="text-3xl text-emerald-800 font-bold mb-6">مراتب تفضيل السنن الرواتب</h2>
+            <ol class="list-decimal pr-8 space-y-4 text-lg">
+                <li class="text-emerald-700 font-semibold">
+                    <span class="text-black">ركعتا الفجر: الآكد والأفضل</span>
+                    <p class="text-gray-600 text-base mt-2">(سنة مؤكدة عند الجمهور)</p>
+                </li>
+                <li class="text-emerald-700">
+                    <span class="text-black">الرواتب المؤكدة:</span>
+                    <ul class="list-disc pr-6 mt-2 text-gray-700">
+                        <li>أربع قبل الظهر + ركعتان بعده</li>
+                        <li>ركعتان بعد المغرب</li>
+                        <li>ركعتان بعد العشاء مع الوتر</li>
+                    </ul>
+                </li>
+                <li class="text-emerald-700">
+                    <span class="text-black">الرواتب المستحبة:</span>
+                    <ul class="list-disc pr-6 mt-2 text-gray-700">
+                        <li>ركعتان إضافيتان بعد الظهر</li>
+                        <li>أربع قبل العصر</li>
+                        <li>ركعتان قبل المغرب</li>
+                        <li>ركعتان قبل العشاء</li>
+                    </ul>
+                </li>
+            </ol>
+        </section>
 
-      <script id="rendered-js" >
-document.addEventListener('DOMContentLoaded', function (event) {
+        <!-- الأوقات والأنواع -->
+        <div class="grid md:grid-cols-2 gap-8 mb-8">
+            <section class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl text-emerald-800 font-bold mb-4">أوقات الأداء</h2>
+                <div class="space-y-4">
+                    <div class="bg-amber-50 p-4 rounded">
+                        <h3 class="font-bold text-emerald-700">الراتبة القبلية</h3>
+                        <p>تبدأ بدخول وقت الفرض وتنتهي بخروجه</p>
+                    </div>
+                    <div class="bg-amber-50 p-4 rounded">
+                        <h3 class="font-bold text-emerald-700">الراتبة البعدية</h3>
+                        <p>تبدأ بعد الانتهاء من الفرض وتنتهي بخروج وقت الفرض</p>
+                    </div>
+                </div>
+            </section>
 
-  if (window.DeviceOrientationEvent) {
-    document.getElementById('notice').innerHTML = 'Working API detected';
-    window.addEventListener('deviceorientation', eventData => {
-      // gamma: Tilting the device from left to right. Tilting the device to the right will result in a positive value.
-      const tiltLR = eventData.gamma;
-      // beta: Tilting the device from the front to the back. Tilting the device to the front will result in a positive value.
-      const tiltFB = eventData.beta;
-      // alpha: The direction the compass of the device aims to in degrees.
-      const dir = eventData.alpha;
-      // Call the function to use the data on the page.
-      deviceOrientationHandler(tiltLR, tiltFB, dir);
-    }, false);
-  } else {
-    document.getElementById('notice').innerHTML = 'No API detected';
-  };
+            <section class="bg-white p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl text-emerald-800 font-bold mb-4">الجدول الكامل</h2>
+                <table class="w-full border-collapse text-center">
+                    <thead class="bg-emerald-100">
+                        <tr>
+                            <th class="p-3 border">الصلاة</th>
+                            <th class="p-3 border">قبلية</th>
+                            <th class="p-3 border">بعدية</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-amber-50">
+                            <td class="p-3 border">الفجر</td>
+                            <td class="p-3 border font-bold text-emerald-700">2</td>
+                            <td class="p-3 border">-</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50">
+                            <td class="p-3 border">الظهر</td>
+                            <td class="p-3 border font-bold text-emerald-700">4</td>
+                            <td class="p-3 border">2 (+2 مستحب)</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50">
+                            <td class="p-3 border">العصر</td>
+                            <td class="p-3 border">4 (مستحب)</td>
+                            <td class="p-3 border">-</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50">
+                            <td class="p-3 border">المغرب</td>
+                            <td class="p-3 border">2 (مستحب)</td>
+                            <td class="p-3 border font-bold text-emerald-700">2</td>
+                        </tr>
+                        <tr class="hover:bg-amber-50">
+                            <td class="p-3 border">العشاء</td>
+                            <td class="p-3 border">2 (مستحب)</td>
+                            <td class="p-3 border font-bold text-emerald-700">2 + وتر</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
 
-  function deviceOrientationHandler(tiltLR, tiltFB, dir) {
-    document.getElementById('tiltLR').innerHTML = Math.ceil(tiltLR);
-    document.getElementById('tiltFB').innerHTML = Math.ceil(tiltFB);
-    document.getElementById('direction').innerHTML = Math.ceil(dir);
-    // Rotate the disc of the compass. - CSS transform
-    const compassDisc = document.getElementById('compassDiscImg');
-    compassDisc.style.transform = `rotate(${dir}deg)`;
-    compassDisc.style.webkitTransform = `rotate(${dir}deg)`;
-    compassDisc.style.MozTransform = `rotate(${dir}deg)`;
-  }
+        <!-- الأحاديث والفضائل -->
+        <section class="bg-white rounded-lg shadow-lg p-6 mb-8">
+            <h2 class="text-3xl text-emerald-800 font-bold mb-6">الأدلة والفضائل</h2>
+            
+            <div class="hadith-box">
+                <p class="text-xl leading-relaxed">"ركعتا الفجر خير من الدنيا وما فيها"</p>
+                <p class="text-gray-600 mt-2">(رواه مسلم)</p>
+            </div>
 
-});
-//# sourceURL=pen.js
-    </script>
+            <div class="hadith-box">
+                <p class="text-xl leading-relaxed">"من حافظ على أربع قبل الظهر وأربع بعدها حرمه الله على النار"</p>
+                <p class="text-gray-600 mt-2">(رواه الترمذي)</p>
+            </div>
 
-</div>
+            <div class="bg-emerald-50 p-6 rounded-lg mt-6">
+                <h3 class="text-2xl text-emerald-800 font-bold mb-4">الفضائل العامة</h3>
+                <ul class="list-disc pr-6 space-y-3">
+                    <li>بناء بيت في الجنة لكل 12 ركعة يومية</li>
+                    <li>جبر النقص في الفرائض</li>
+                    <li>رفع الدرجات ومحو السيئات</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-emerald-900 text-white py-6 text-center">
+        <div class="container mx-auto">
+            <p class="mb-4">المراجع: صحيح البخاري - صحيح مسلم - سنن الترمذي</p>
+            <p>© 2024 موقع السنن الرواتب - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
 </body>
-<div class="footer">
-  &copy; 2025 اتجاه القبلة - Tous droits réservés |
-</div>
 </html>
