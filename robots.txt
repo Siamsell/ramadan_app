@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ramadan-pied.vercel.app/sitemap.xml
