@@ -50,7 +50,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         }
         </script>
     <style>
-        body {
+    body {
     direction: rtl;
     font-family: 'Lateef', cursive;
     background-color: var( --primary-color);
@@ -64,8 +64,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     text-align:center;
     font-family: 'Arial', sans-serif;
     backdrop-filter: blur(3px);
+   background-color: #041b0c; /* couleur uniforme qui évite le flash */
     background: linear-gradient(rgba(38, 112, 138, 0.9), rgba(30, 26, 71, 0.7));
+    background-attachment: fixed; 
 }  
+  
   
 
 html,body {
@@ -1565,3 +1568,4 @@ setInterval(showQuote, 50000);
             </main>          
 </body>
 </html>
+
