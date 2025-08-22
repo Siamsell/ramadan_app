@@ -29,6 +29,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta property="og:image" content="URL_DE_VOTRE_IMAGE_DE_PREVIEW">
 <meta property="og:url" content="https://ramadan-pied.vercel.app/">
 <meta property="og:type" content="website">
+  <meta name="theme-color" content="#041b0c">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
     <title>رمضان - القرآن والمعلومات الإسلامية</title>
     
     <link rel="icon" type="image/x-icon" href="https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1Njhf?temp_key=%96%88%28%8E%98&inline=1">
@@ -77,6 +80,8 @@ html,body {
     overflow-x: hidden; 
     margin: 0;
     padding: 0;
+     background: #041b0c !important;  /* couleur sombre globale */
+    overscroll-behavior: none; 
     box-sizing: border-box;
 }
 
@@ -1038,6 +1043,14 @@ h5{
         width: 100%;
     }
 }
+      @media (max-width: 768px) {
+    section {
+        background: rgba(20,20,20,0.85);
+    }
+    nav ul {
+        background: rgba(0, 0, 0, 0.75);
+    }
+}
 .ramadan-title {
         text-align: center;
         margin: 2rem 0;
@@ -1568,4 +1581,5 @@ setInterval(showQuote, 50000);
             </main>          
 </body>
 </html>
+
 
