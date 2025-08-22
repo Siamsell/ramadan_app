@@ -69,10 +69,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     backdrop-filter: blur(3px);
    background-color: #041b0c; 
     background: linear-gradient(rgba(38, 112, 138, 0.9), rgba(30, 26, 71, 0.7));
-    background-attachment: fixed; 
+   background-attachment: scroll;  
 }  
   
-  
+  #mon-header, #accueil, #main-footer {
+    background-color: #041b0c;
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll;  /* important sur mobile */
+}
 
 html,body {
     width: 100%;
@@ -80,6 +85,8 @@ html,body {
     overflow-x: hidden; 
     margin: 0;
     padding: 0;
+    overscroll-behavior: none;
+    -webkit-overflow-scrolling: touch;
     box-sizing: border-box;
 }
 
@@ -1572,6 +1579,7 @@ setInterval(showQuote, 50000);
             </main>          
 </body>
 </html>
+
 
 
 
