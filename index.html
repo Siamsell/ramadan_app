@@ -71,12 +71,19 @@
             background-repeat: no-repeat;
             color: rgb(204, 135, 101);
             padding: 20px 10px;
-            transition: background-image 2s ease-in-out;
+            transition: background-image 2s ease-in-out, opacity 1.5s ease-in-out;
+            transform: scale(1.1) translateY(-10px);
+
             display: flex;
+            
             justify-content: center;
             align-items: center;
             position: relative;
         }
+        #mon-header.fade {
+  opacity: 0;
+  transform: scale(1.05); /* léger zoom */
+}
 
         #mon-header::after {
             content: '';
@@ -1203,7 +1210,7 @@
                 "https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1Mjlf?temp_key=%DA%3A%60&inline=1",
                 "https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1MzZf?temp_key=%E3%DEt%DF%C7%1Cw%97%9F%F1%CD%F5%F7%DFZ%E9%BE%9A%F1%FFu%EFW%9D%8E%98&inline=1",
                 "https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NzNf?temp_key=%AD%A9%9Au%A9%F6%D3yZ%9E%D7%AB%9F%5D%FA%EB%1E%FA%F2%3A%60&inline=1",
-                 "https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NjFf?temp_key=%7F%C7%7D%D5%E6%9E%DFw%B6%DB%DDu%D3g%B8%DB%7D%F7%7F%AE%B8u%D7%F8%8E%98&inline=1",
+                "https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NjFf?temp_key=%7F%C7%7D%D5%E6%9E%DFw%B6%DB%DDu%D3g%B8%DB%7D%F7%7F%AE%B8u%D7%F8%8E%98&inline=1",
                 "https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NTFf?temp_key=u%AB%5E%B2%B6%A6i%D6%A7%8E%98&inline=1",
                 "https://web.opendrive.com/api/v1/download/file.json/ODZfNjkwMzQ1NjFf?temp_key=%7F%C7%7D%D5%E6%9E%DFw%B6%DB%DDu%D3g%B8%DB%7D%F7%7F%AE%B8u%D7%F8%8E%98&inline=1",
                 "https://i.ibb.co/CKZn2HMX/1756bf187e5281ec76b82318adb98431.jpg",
@@ -1212,13 +1219,11 @@
                 "https://i.ibb.co/DHCBwyFk/d188a5f12053876311bd666b82df68bd.jpg"
             ];
             let currentIndex = 0;
-            
             header.style.backgroundImage = `url('${images[currentIndex]}')`;
-
             setInterval(function() {
                 currentIndex = (currentIndex + 1) % images.length;
                 header.style.backgroundImage = `url('${images[currentIndex]}')`;
-            }, 7000);
+            },1500);
         });
 
         // Citations rotatives
@@ -1317,6 +1322,7 @@
     </script>
 </body>
 </html>
+
 
 
 
